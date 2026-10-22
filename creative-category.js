@@ -56,20 +56,50 @@
 
   const lightbox = document.querySelector("[data-design-lightbox]");
   if (lightbox) {
-    const output = lightbox.querySelector("[data-lightbox-output]");
+    const imageOutput = lightbox.querySelector("[data-lightbox-output]");
+    const videoOutput = lightbox.querySelector("[data-lightbox-video-output]");
     const caption = lightbox.querySelector("[data-lightbox-caption]");
+    const description = lightbox.querySelector("[data-lightbox-description]");
     const close = lightbox.querySelector("[data-lightbox-close]");
-    const triggers = [...document.querySelectorAll("[data-lightbox-image]")];
+    const imageTriggers = [...document.querySelectorAll("[data-lightbox-image]")];
+    const videoTriggers = [...document.querySelectorAll("[data-lightbox-video]")];
     let opener = null;
-    const closeLightbox = () => { lightbox.hidden = true; output.removeAttribute("src"); opener?.focus(); };
-    triggers.forEach((trigger) => trigger.addEventListener("click", () => {
+
+    const closeLightbox = () => {
+      lightbox.hidden = true;
+      imageOutput.removeAttribute("src");
+      imageOutput.hidden = true;
+      videoOutput.pause();
+      videoOutput.removeAttribute("src");
+      videoOutput.removeAttribute("poster");
+      videoOutput.hidden = true;
+      description.hidden = true;
+      description.textContent = "";
+      opener?.focus();
+    };
+
+    imageTriggers.forEach((trigger) => trigger.addEventListener("click", () => {
       opener = trigger;
-      output.src = trigger.dataset.lightboxImage;
-      output.alt = trigger.dataset.lightboxAlt || "Enlarged design artwork";
+      imageOutput.src = trigger.dataset.lightboxImage;
+      imageOutput.alt = trigger.dataset.lightboxAlt || "Enlarged design artwork";
+      imageOutput.hidden = false;
       caption.textContent = trigger.closest("figure")?.querySelector("figcaption")?.textContent || "Selected Work";
       lightbox.hidden = false;
       close.focus();
     }));
+
+    videoTriggers.forEach((trigger) => trigger.addEventListener("click", () => {
+      opener = trigger;
+      videoOutput.src = trigger.dataset.lightboxVideo;
+      videoOutput.poster = trigger.dataset.lightboxPoster || "";
+      videoOutput.hidden = false;
+      caption.textContent = trigger.dataset.lightboxTitle || "Design speed run";
+      description.textContent = trigger.dataset.lightboxDescription || "";
+      description.hidden = !description.textContent;
+      lightbox.hidden = false;
+      close.focus();
+    }));
+
     close.addEventListener("click", closeLightbox);
     lightbox.addEventListener("click", (event) => { if (event.target === lightbox) closeLightbox(); });
     document.addEventListener("keydown", (event) => { if (event.key === "Escape" && !lightbox.hidden) closeLightbox(); });
