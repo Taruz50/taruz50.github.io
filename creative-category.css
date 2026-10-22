@@ -73,7 +73,7 @@ body.creative-gallery > nav .nav__logo img.creative-logo { display:block; width:
 .design-wide img { width:min(100%,700px); max-height:none; }
 
 /* Graphic-design process study. */
-.design-process { padding:clamp(6rem,12vw,12rem) 7vw; background:#171715; color:var(--paper); }
+.design-process { padding:clamp(6rem,12vw,12rem) 7vw; background:#171715; color:var(--paper); scroll-margin-top:clamp(5.5rem,8vw,6.5rem); }
 .design-process-heading { display:flex; align-items:end; justify-content:space-between; gap:2rem; width:min(100%,1240px); margin:0 auto; }
 .design-process-heading > p,.design-process-index,.design-process-meta dt { margin:0; color:#c8ff50; font:500 .6rem/1.4 var(--mono); letter-spacing:.11em; }
 .design-process-heading h2 { max-width:700px; margin:0; font:500 clamp(3.4rem,7vw,7.5rem)/.82 var(--serif); letter-spacing:-.075em; }
@@ -94,8 +94,12 @@ body.creative-gallery > nav .nav__logo img.creative-logo { display:block; width:
 .design-process-meta dl { display:grid; gap:1.3rem; margin:0; padding-top:1.2rem; border-top:1px solid rgb(231 226 215 / 20%); }
 .design-process-meta dl div { display:grid; gap:.4rem; }
 .design-process-meta dd { margin:0; color:var(--bone); font:.76rem/1.45 var(--sans); }
-.design-process-meta > p:last-child { max-width:270px; margin:3rem 0 0; color:var(--bone); font-size:.9rem; line-height:1.55; }
-@media (max-width:800px) { .design-process-heading { display:block; } .design-process-heading h2 { margin-top:1.1rem; } .design-process-layout { grid-template-columns:1fr; gap:2.5rem; } .design-process-video { box-shadow:12px 12px 0 rgb(200 255 80 / 8%); } .design-process-meta { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; } .design-process-meta h3 { margin:0; } .design-process-meta dl { padding-top:0; border-top:0; } .design-process-meta > p:last-child { grid-column:1 / -1; margin:0; } }
+.design-process-meta > p:last-of-type { max-width:270px; margin:3rem 0 0; color:var(--bone); font-size:.9rem; line-height:1.55; }
+.design-process-explore { display:inline-block; margin-top:1.8rem; padding-bottom:.42rem; border-bottom:1px solid #c8ff50; color:var(--paper); font:500 .6rem/1.3 var(--mono); letter-spacing:.1em; text-transform:uppercase; transition:color .2s ease,border-color .2s ease; }
+.design-process-explore span { color:#c8ff50; }
+.design-process-explore:hover { color:#c8ff50; }
+.design-process-explore:focus-visible { outline:2px solid #c8ff50; outline-offset:6px; }
+@media (max-width:800px) { .design-process-heading { display:block; } .design-process-heading h2 { margin-top:1.1rem; } .design-process-layout { grid-template-columns:1fr; gap:2.5rem; } .design-process-video { box-shadow:12px 12px 0 rgb(200 255 80 / 8%); } .design-process-meta { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; } .design-process-meta h3 { margin:0; } .design-process-meta dl { padding-top:0; border-top:0; } .design-process-meta > p:last-of-type { grid-column:1 / -1; margin:0; } }
 @media (max-width:520px) { .design-process { padding-inline:7vw; } .design-process-heading h2 { font-size:clamp(3.15rem,15vw,4.5rem); } .design-process-meta { grid-template-columns:1fr; gap:1.5rem; } .design-process-meta dl { padding-top:1.2rem; border-top:1px solid rgb(231 226 215 / 20%); } }
 
 /* A quiet editorial marker reserved for the graphic-design hero. */
