@@ -1,0 +1,13 @@
+/* Shared media viewer for artwork and process films. */
+:root { --media-lightbox-paper:#f2f2f2; --media-lightbox-muted:#a4a69f; --media-lightbox-accent:#d5ed9c; --media-lightbox-mono:"Courier New",Courier,monospace; }
+body.creative-page { --media-lightbox-paper:var(--paper); --media-lightbox-muted:var(--bone); --media-lightbox-accent:var(--wine); --media-lightbox-mono:var(--mono); }
+.media-lightbox[hidden] { display:none; }
+.media-lightbox { position:fixed; inset:0; z-index:60; display:grid; place-items:center; padding:clamp(1rem,4vw,4rem); background:rgb(11 10 9 / 94%); }
+.media-lightbox figure { display:grid; justify-items:center; width:min(100%,1200px); max-height:100%; margin:0; }
+.media-lightbox img,.media-lightbox video { display:block; max-width:100%; max-height:calc(100svh - 9rem); object-fit:contain; }
+.media-lightbox video { width:100%; background:#090908; }
+.media-lightbox figcaption { margin-top:1rem; color:var(--media-lightbox-muted); font:.58rem/1.4 var(--media-lightbox-mono); letter-spacing:.1em; text-align:center; text-transform:uppercase; }
+.media-lightbox-description { max-width:470px; margin:.55rem 0 0; color:var(--media-lightbox-muted); font-size:.85rem; line-height:1.5; text-align:center; }
+.media-lightbox-close { position:fixed; top:1.4rem; right:3vw; z-index:1; padding:.4rem 0; border:0; border-bottom:1px solid var(--media-lightbox-accent); background:transparent; color:var(--media-lightbox-paper); font:.6rem/1.3 var(--media-lightbox-mono); letter-spacing:.1em; text-transform:uppercase; cursor:pointer; }
+.media-lightbox-close span { margin-left:.4rem; font-size:1.15rem; vertical-align:-.08em; }
+.media-lightbox-close:focus-visible { outline:2px solid var(--media-lightbox-accent); outline-offset:6px; }

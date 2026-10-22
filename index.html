@@ -22,6 +22,7 @@
   />
 
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="media-lightbox.css" />
   <script>
     try {
       if (!sessionStorage.getItem("taruz-professional-intro") && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -146,9 +147,10 @@
         <p class="section-label">CREATIVE WORK</p>
 
         <div class="creative-feature">
-          <a class="creative-image" href="home.html" aria-label="Open the creative portfolio">
+          <button class="creative-image" type="button" data-lightbox-image="assets/PM-compose.jpeg" data-lightbox-alt="Editorial photograph from Home / Cardiff" data-lightbox-title="Home / Cardiff" aria-label="Enlarge Home / Cardiff photograph">
             <img src="assets/PM-compose.jpeg" alt="Editorial photograph from Home / Cardiff" />
-          </a>
+            <span class="creative-image-action" aria-hidden="true">View image <span>↗</span></span>
+          </button>
 
           <div class="creative-details">
             <p class="creative-meta">PHOTOGRAPHY / GRAPHIC DESIGN / MOVING IMAGE</p>
@@ -202,6 +204,8 @@
 
   <footer class="site-footer"><a href="home.html">← CREATIVE PORTFOLIO</a><p>© 2026 TARUZ</p></footer>
 
+  <div class="media-lightbox" data-media-lightbox hidden role="dialog" aria-modal="true" aria-labelledby="lightbox-title"><button class="media-lightbox-close" type="button" data-lightbox-close aria-label="Close media viewer">Close <span aria-hidden="true">×</span></button><figure><img src="" alt="" data-lightbox-output /><video controls playsinline preload="metadata" data-lightbox-video-output hidden>Your browser does not support video playback.</video><figcaption id="lightbox-title" data-lightbox-caption></figcaption><p class="media-lightbox-description" data-lightbox-description hidden></p></figure></div>
+
   <script>
     (() => {
       const root = document.documentElement;
@@ -213,6 +217,7 @@
       }, 900);
     })();
   </script>
+  <script src="media-lightbox.js"></script>
 
 </body>
 </html>

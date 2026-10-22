@@ -315,9 +315,12 @@ section[id], #top, #main-content { scroll-margin-top: 100px; }
 .project-card-link { margin-top: auto; padding-top: 2rem; color: var(--muted); font-family: "Courier New", Courier, monospace; font-size: 0.8rem; }
 .text-link { padding-bottom: .6rem; border-bottom: 1px solid var(--accent); color: var(--text); }
 .creative-feature { display: grid; grid-template-columns: minmax(220px, 42%) minmax(0, 1fr); align-items: end; gap: clamp(1.5rem, 5vw, 5rem); max-width: 980px; margin-top: 2.75rem; padding-top: 1rem; border-top: 1px solid var(--line); }
-.creative-image { display: block; overflow: hidden; aspect-ratio: 4 / 5; background: var(--panel); border: 1px solid var(--line); }
+.creative-image { position:relative; display: block; width:100%; padding:0; overflow: hidden; aspect-ratio: 4 / 5; border: 1px solid var(--line); background: var(--panel); cursor:zoom-in; }
 .creative-image img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(.76) contrast(1.04); transition: transform .35s ease, filter .35s ease; }
 .creative-image:hover img, .creative-image:focus-visible img { transform: scale(1.025); filter: saturate(.9) contrast(1.06); }
+.creative-image-action { position:absolute; right:1rem; bottom:1rem; padding:.5rem .65rem; border:1px solid #d5ed9c99; background:#0b0b0bcc; color:var(--accent); font:.62rem/1 "Courier New",Courier,monospace; letter-spacing:.08em; text-transform:uppercase; opacity:0; transform:translateY(.35rem); transition:opacity .2s ease,transform .2s ease; }
+.creative-image:hover .creative-image-action, .creative-image:focus-visible .creative-image-action { opacity:1; transform:translateY(0); }
+.creative-image:focus-visible { outline:2px solid var(--accent); outline-offset:6px; }
 .creative-details { padding-bottom: .4rem; }
 .creative-meta { margin-bottom: 1.25rem; color: var(--accent); font: .68rem/1.5 "Courier New", Courier, monospace; letter-spacing: .08em; }
 .creative-details h2 { margin: 0; max-width: 560px; }
@@ -353,6 +356,7 @@ section[id], #top, #main-content { scroll-margin-top: 100px; }
   .hero-topline { font-size: .6rem; }
   .creative-feature { grid-template-columns: 1fr; gap: 1.5rem; margin-top: 2rem; }
   .creative-image { width: min(100%, 330px); aspect-ratio: 4 / 5; }
+  .creative-image-action { opacity:1; transform:none; }
   .creative-meta { margin-bottom: .85rem; font-size: .6rem; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; } .project-card:hover, .project-card:focus-within { transform: none; } .portfolio-splash { display:none !important; } }
