@@ -41,3 +41,11 @@
 @media (max-width:800px) { .process-index-hero { grid-template-columns:1fr; min-height:0; padding-top:clamp(4rem,10vw,6rem); } .process-back-link { margin-bottom:3.5rem; } .process-index-intro { margin:0; } .process-list-heading { display:block; } .process-list-heading h2 { margin-top:1.1rem; } .process-card { grid-template-columns:1fr; gap:2.5rem; } .process-card-media { box-shadow:12px 12px 0 rgb(200 255 80 / 8%); } .process-card-copy { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; } .process-card-series-mobile { display:block; grid-column:1 / -1; } .process-card h3 { margin:0; } .process-card-details { padding-top:0; border-top:0; } .process-card-copy > p:last-child { grid-column:1 / -1; margin:0; } }
 @media (max-width:520px) { .process-index-hero,.process-list-section { padding-inline:7vw; } .process-index-hero h1 { font-size:clamp(4.5rem,20vw,6.8rem); } .process-card { padding-left:2rem; } .process-card-copy { grid-template-columns:1fr; gap:1.5rem; } .process-card-details { padding-top:1.1rem; border-top:1px solid rgb(231 226 215 / 20%); } .process-index-footer { flex-direction:column; gap:.8rem; padding-inline:7vw; } }
 @media (prefers-reduced-motion:reduce) { .process-card-cover img { transition:none; } }
+
+/* Tutorials uses the existing social artwork as an editorial hero image. */
+.tutorials-page .process-index-hero { position:relative; isolation:isolate; overflow:hidden; }
+.tutorials-page .process-index-hero > :not(.tutorials-hero-image) { position:relative; z-index:1; }
+.tutorials-hero-image { position:absolute; z-index:0; inset:0; margin:0; }
+.tutorials-hero-image::after { content:""; position:absolute; inset:0; background:linear-gradient(90deg,rgb(17 16 15 / 94%) 0%,rgb(17 16 15 / 74%) 42%,rgb(17 16 15 / 28%) 100%); }
+.tutorials-hero-image img { display:block; width:100%; height:100%; object-fit:cover; object-position:center; }
+@media (max-width:800px) { .tutorials-hero-image::after { background:linear-gradient(180deg,rgb(17 16 15 / 52%),rgb(17 16 15 / 82%) 82%,rgb(17 16 15 / 94%)); } }
