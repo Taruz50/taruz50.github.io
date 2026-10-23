@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Start a project with Taruz Creative. Share your brief and receive a tailored quote." />
+  <meta name="theme-color" content="#07130d" />
+  <link rel="canonical" href="https://taruz50.github.io/quote.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Start a Project — Taruz Creative" />
+  <meta property="og:description" content="Share your project details and receive a tailored Taruz Creative quote." />
+  <meta property="og:url" content="https://taruz50.github.io/quote.html" />
+  <meta property="og:image" content="https://taruz50.github.io/assets/social/taruz-professional-preview.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Start a Project — Taruz Creative" />
+  <meta name="twitter:description" content="Share your project details and receive a tailored Taruz Creative quote." />
+  <meta name="twitter:image" content="https://taruz50.github.io/assets/social/taruz-professional-preview.png" />
+  <title>Start a Project — Taruz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet" />
+  <link rel="stylesheet" href="creative-category.css" />
+  <link rel="stylesheet" href="quote.css" />
+</head>
+<body class="creative-page quote-page">
+  <a class="skip-link" href="#project-enquiry">Skip to project enquiry</a>
+  <header class="creative-page-header">
+    <nav class="creative-page-nav" aria-label="Creative navigation">
+      <div class="creative-page-bar"><a class="creative-page-brand" href="home.html" aria-label="Taruz creative home"><img src="assets/Taruz.png" alt="Taruz" /></a><button class="creative-page-menu" type="button" data-creative-menu aria-controls="quote-page-links" aria-label="Open navigation" aria-expanded="false"><i class="ri-menu-line" aria-hidden="true"></i></button></div>
+      <ul class="creative-page-links" id="quote-page-links"><li><a href="home.html">Creative Home</a></li><li><a href="gallery.html">Photography</a></li><li><a href="design.html">Graphic Design</a></li><li><a href="tutorials.html">Tutorials</a></li><li><a href="services.html">Services</a></li><li><a href="video.html">Moving Image</a></li><li><a href="index.html">Professional Portfolio ↗</a></li></ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="quote-hero" aria-labelledby="quote-title">
+      <div class="quote-hero-grid" aria-hidden="true"></div>
+      <p class="quote-kicker">TARUZ CREATIVE / PROJECT ENQUIRY</p>
+      <h1 id="quote-title">START A PROJECT</h1>
+      <p class="quote-intro">Tell me what you have in mind.</p>
+      <p class="quote-support">Share a few details about your project and I’ll review the scope before getting back to you with a tailored quote.</p>
+    </section>
+
+    <section class="quote-section" id="project-enquiry" aria-labelledby="project-enquiry-title">
+      <div class="quote-aside" aria-hidden="true">
+        <p class="quote-aside-index">01 / BRIEF</p>
+        <div class="quote-aside-line"></div>
+        <p>GOOD WORK<br /><em>STARTS WITH<br />A CLEAR IDEA.</em></p>
+      </div>
+
+      <form class="quote-form" data-quote-form>
+        <div class="quote-form-heading">
+          <p class="quote-form-label">PROJECT DETAILS</p>
+          <h2 id="project-enquiry-title">A few details,<br /><em>then I’ll take it from there.</em></h2>
+          <p>Fields marked <span aria-hidden="true">*</span> are required.</p>
+        </div>
+
+        <div class="quote-form-row">
+          <div class="quote-field"><label for="quote-name">Name <span aria-hidden="true">*</span></label><input id="quote-name" name="name" type="text" autocomplete="name" required /></div>
+          <div class="quote-field"><label for="quote-email">Email <span aria-hidden="true">*</span></label><input id="quote-email" name="email" type="email" autocomplete="email" required /></div>
+        </div>
+
+        <div class="quote-form-row">
+          <div class="quote-field"><label for="quote-service">Service <span aria-hidden="true">*</span></label><select id="quote-service" name="service" required><option value="">Select a service</option><option>Graphic Design</option><option>Video Editing</option><option>Web Design &amp; Development</option><option>Creative Package</option><option>Other</option></select></div>
+          <div class="quote-field"><label for="quote-specific">Specific service / package <span class="quote-field-hint">recommended</span></label><input id="quote-specific" name="specificService" type="text" list="specific-service-options" autocomplete="off" aria-describedby="quote-specific-help" /><datalist id="specific-service-options"></datalist><p id="quote-specific-help">Choose a service or package if you already know what you need.</p></div>
+        </div>
+
+        <div class="quote-field quote-field--full"><label for="quote-brief">Tell me about the project <span aria-hidden="true">*</span></label><textarea id="quote-brief" name="brief" rows="6" required aria-describedby="quote-brief-help"></textarea><p id="quote-brief-help">What are you creating, who is it for, and what do you want the finished work to achieve?</p></div>
+
+        <div class="quote-form-row quote-form-row--three">
+          <div class="quote-field"><label for="quote-deadline">Preferred deadline</label><input id="quote-deadline" name="deadline" type="date" /></div>
+          <div class="quote-field quote-field--wide"><label for="quote-budget">Budget range</label><select id="quote-budget" name="budget"><option value="">Select a range</option><option>Under £100</option><option>£100–£250</option><option>£250–£500</option><option>£500–£1,000</option><option>£1,000+</option><option>Not sure yet</option></select></div>
+        </div>
+
+        <div class="quote-field quote-field--full"><label for="quote-reference">Reference / inspiration link</label><input id="quote-reference" name="reference" type="url" inputmode="url" placeholder="https://" /></div>
+
+        <fieldset class="quote-contact-method"><legend>Preferred contact method</legend><div class="quote-contact-options"><label><input type="radio" name="contactMethod" value="Email" checked /><span>Email</span></label><label><input type="radio" name="contactMethod" value="WhatsApp" /><span>WhatsApp</span></label><label><input type="radio" name="contactMethod" value="Either" /><span>Either</span></label></div></fieldset>
+        <div class="quote-field quote-whatsapp-field" data-whatsapp-field hidden><label for="quote-whatsapp">Phone / WhatsApp number <span class="quote-field-hint">optional</span></label><input id="quote-whatsapp" name="whatsapp" type="tel" autocomplete="tel" inputmode="tel" /></div>
+
+        <div class="quote-form-action"><button class="quote-submit" type="submit">Send Project Enquiry <span aria-hidden="true">↗</span></button><p class="quote-form-status" data-quote-status role="status" aria-live="polite"></p></div>
+      </form>
+    </section>
+  </main>
+  <script src="creative-category.js"></script>
+  <script src="quote.js"></script>
+</body>
+</html>
