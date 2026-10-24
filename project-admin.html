@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="description" content="Private Taruz Creative administration workspace." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="project-admin.css" />
+  <title>Taruz Creative — Project Admin</title>
+</head>
+<body class="project-admin-page">
+  <section class="admin-auth" data-auth-gate aria-labelledby="auth-title">
+    <div class="admin-auth-card">
+      <p class="admin-kicker">TARUZ CREATIVE / PRIVATE</p>
+      <h1 id="auth-title">Taruz<br /><em>Admin.</em></h1>
+      <p>Sign in to access your projects, client details and document workspace.</p>
+      <form data-auth-form class="auth-form">
+        <label>Email<input name="email" type="email" autocomplete="email" required /></label>
+        <label>Password<input name="password" type="password" autocomplete="current-password" required /></label>
+        <button type="submit">Sign in</button>
+        <p data-auth-status role="status" aria-live="polite"></p>
+      </form>
+      <p class="auth-note">Access is limited to accounts created by the Taruz administrator.</p>
+    </div>
+  </section>
+  <main class="project-admin-shell" data-admin-app hidden>
+    <aside class="project-admin-form-panel" aria-labelledby="admin-title">
+      <header class="admin-header"><div class="admin-header-row"><p class="admin-kicker">TARUZ CREATIVE / PRIVATE WORKSPACE</p><button type="button" class="sign-out" data-sign-out>Sign out</button></div><h1 id="admin-title">Project<br /><em>Admin.</em></h1><p>Enter a project once, then prepare each client document from the same details.</p></header>
+      <section class="admin-dashboard" aria-label="Project dashboard"><div><span data-dashboard-count="all">0</span><small>All projects</small></div><div><span data-dashboard-count="active">0</span><small>Active</small></div><div><span data-dashboard-count="outstanding">0</span><small>Payment due</small></div></section>
+      <form id="project-form" class="project-form" novalidate>
+        <fieldset><legend>Client</legend><div class="form-grid"><label>Client name<input name="clientName" autocomplete="name" placeholder="Sarah Jones" /></label><label>Client email<input name="clientEmail" type="email" autocomplete="email" placeholder="sarah@example.com" /></label><label>Company / organisation<input name="clientCompany" autocomplete="organization" placeholder="Optional" /></label><label>Phone<input name="clientPhone" type="tel" autocomplete="tel" placeholder="Optional" /></label></div></fieldset>
+        <fieldset><legend>Project</legend><div class="form-grid"><label>Project title<input name="projectTitle" placeholder="Spring campaign" /></label><label>Project status<select name="projectStatus"><option value="enquiry">Enquiry</option><option value="quote_sent">Quote sent</option><option value="accepted">Accepted</option><option value="deposit_due">Deposit due</option><option value="in_progress">In progress</option><option value="balance_due">Balance due</option><option value="completed">Completed</option><option value="cancelled">Cancelled</option></select></label><label>Service<input name="service" placeholder="Graphic Design" /></label><label>Package / service type<input name="packageType" placeholder="Campaign Artwork" /></label><label>Project reference<input name="projectReference" data-generated-reference /></label><label class="form-full">Project description<textarea name="projectDescription" rows="3" placeholder="A concise outline of the creative request."></textarea></label><label class="form-full">Scope<textarea name="scope" rows="3" placeholder="What is included in the agreed scope?"></textarea></label><label class="form-full">Deliverables <small>One item per line.</small><textarea name="deliverables" rows="5" placeholder="Hero artwork&#10;4 supporting social graphics&#10;Instagram story version"></textarea></label></div></fieldset>
+        <fieldset><legend>Commercial details</legend><div class="form-grid"><label>Quote number<input name="quoteNumber" data-generated-reference /></label><label>Invoice number<input name="invoiceNumber" data-generated-reference /></label><label>Currency<select name="currency"><option value="GBP">GBP (£)</option><option value="EUR">EUR (€)</option><option value="USD">USD ($)</option></select></label><label>Project total<input name="projectTotal" type="number" min="0" step="0.01" placeholder="500" /></label><label>Discount type<select name="discountType"><option value="amount">Amount</option><option value="percent">Percentage</option></select></label><label>Discount<input name="discountValue" type="number" min="0" step="0.01" placeholder="0" /></label><label>Deposit percentage<input name="depositPercentage" type="number" min="0" max="100" step="0.01" value="50" /></label><label class="toggle-label"><input name="depositManual" type="checkbox" /> Set deposit manually</label><label>Deposit amount<input name="depositAmount" type="number" min="0" step="0.01" placeholder="Calculated" /></label><label>Amount already paid<input name="amountPaid" type="number" min="0" step="0.01" placeholder="0" /></label><label class="toggle-label"><input name="balanceManual" type="checkbox" /> Set balance manually</label><label>Remaining balance<input name="remainingBalance" type="number" min="0" step="0.01" placeholder="Calculated" /></label></div><div class="calculation-strip"><span>Subtotal <strong data-calculation="subtotal">£0.00</strong></span><span>Discount <strong data-calculation="discount">£0.00</strong></span><span>Final total <strong data-calculation="total">£0.00</strong></span><span>Deposit due <strong data-calculation="deposit">£0.00</strong></span><span>Balance <strong data-calculation="balance">£0.00</strong></span></div></fieldset>
+        <fieldset><legend>Dates & revisions</legend><div class="form-grid"><label>Quote date<input name="quoteDate" type="date" /></label><label>Quote valid until<input name="quoteValidUntil" type="date" /></label><label>Project start<input name="projectStart" type="date" /></label><label>Target delivery<input name="targetDelivery" type="date" /></label><label>Invoice issue date<input name="invoiceIssueDate" type="date" /></label><label>Payment due date<input name="paymentDueDate" type="date" /></label><label>Payment received<input name="paymentReceivedDate" type="date" /></label><label>Revision rounds<input name="revisions" type="number" min="0" step="1" value="2" /></label><label class="form-full">Revision note<textarea name="revisionNote" rows="2">Additional revisions or significant scope changes may require an additional quote.</textarea></label></div></fieldset>
+        <fieldset><legend>Payment details <small>Private admin only</small></legend><div class="form-grid"><label>Payment method<input name="paymentMethod" placeholder="Bank transfer" /></label><label>Account holder<input name="accountHolder" placeholder="Enter when needed" /></label><label>Bank name<input name="bankName" placeholder="Enter when needed" /></label><label>Sort code<input name="sortCode" placeholder="00-00-00" /></label><label>Account number<input name="accountNumber" placeholder="00000000" /></label><label>Payment reference<input name="paymentReference" placeholder="Invoice number" /></label><label>Receipt number<input name="receiptNumber" data-generated-reference /></label><label>Payment type<select name="paymentType"><option>Deposit</option><option>Partial payment</option><option>Final payment</option><option>Full payment</option></select></label><label class="form-full">Payment notes<textarea name="paymentNotes" rows="2" placeholder="Optional payment instructions or notes."></textarea></label></div></fieldset>
+      </form>
+      <div class="admin-actions"><button type="button" data-save-project>Save Project</button><button type="button" data-new-project>New Project</button><p id="admin-status" role="status" aria-live="polite"></p></div>
+      <section class="saved-projects" aria-labelledby="saved-projects-title"><div class="saved-projects-heading"><h2 id="saved-projects-title">Saved projects</h2><button type="button" data-refresh-projects>Refresh</button></div><div data-project-list class="project-list"><p>Sign in to load projects.</p></div></section>
+    </aside>
+
+    <section class="project-admin-preview-panel" aria-label="Live document preview">
+      <div class="preview-toolbar"><div class="document-tabs" role="tablist" aria-label="Document type"><button type="button" role="tab" aria-selected="true" data-document-tab="quote">Quote</button><button type="button" role="tab" aria-selected="false" data-document-tab="confirmation">Confirmation</button><button type="button" role="tab" aria-selected="false" data-document-tab="deposit">Deposit</button><button type="button" role="tab" aria-selected="false" data-document-tab="balance">Balance</button><button type="button" role="tab" aria-selected="false" data-document-tab="receipt">Receipt</button></div><div class="preview-actions"><button type="button" data-copy-email>Copy Quote Email</button><button type="button" data-print>Print / Save as PDF</button></div></div>
+      <p class="suggested-file" data-suggested-file>TC-2026-001-Quote-Client.pdf</p>
+      <article class="document-preview" data-document-preview aria-live="polite"></article>
+    </section>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" crossorigin="anonymous"></script>
+  <script src="supabase-config.js"></script>
+  <script src="project-admin.js"></script>
+</body>
+</html>
