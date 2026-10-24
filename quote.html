@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" /><link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png" /><link rel="apple-touch-icon" href="assets/apple-touch-icon.png" sizes="180x180" /><link rel="manifest" href="site.webmanifest" />
   <meta name="description" content="Start a project with Taruz Creative. Share your brief and receive a tailored quote." />
   <meta name="theme-color" content="#07130d" />
   <link rel="canonical" href="https://taruzcreate.com/quote.html" />
@@ -48,7 +49,8 @@
         <p>GOOD WORK<br /><em>STARTS WITH<br />A CLEAR IDEA.</em></p>
       </div>
 
-      <form class="quote-form" data-quote-form>
+      <form class="quote-form" data-quote-form novalidate>
+        <div data-quote-form-fields>
         <div class="quote-form-heading">
           <p class="quote-form-label">PROJECT DETAILS</p>
           <h2 id="project-enquiry-title">A few details,<br /><em>then I’ll take it from there.</em></h2>
@@ -73,17 +75,31 @@
           <div class="quote-field quote-field--wide"><label for="quote-budget">Budget range</label><select id="quote-budget" name="budget"><option value="">Select a range</option><option>Under £100</option><option>£100–£250</option><option>£250–£500</option><option>£500–£1,000</option><option>£1,000+</option><option>Not sure yet</option></select></div>
         </div>
 
-        <div class="quote-field quote-field--full"><label for="quote-reference">Reference / inspiration link</label><input id="quote-reference" name="reference" type="url" inputmode="url" placeholder="https://" /></div>
+        <div class="quote-field quote-field--full"><label for="quote-reference">Reference / inspiration link <span class="quote-field-hint">optional</span></label><input id="quote-reference" name="reference" type="url" inputmode="url" placeholder="https://" /></div>
 
         <fieldset class="quote-contact-method"><legend>Preferred contact method</legend><div class="quote-contact-options"><label><input type="radio" name="contactMethod" value="Email" checked /><span>Email</span></label><label><input type="radio" name="contactMethod" value="WhatsApp" /><span>WhatsApp</span></label><label><input type="radio" name="contactMethod" value="Either" /><span>Either</span></label></div></fieldset>
         <div class="quote-field quote-whatsapp-field" data-whatsapp-field hidden><label for="quote-whatsapp">Phone / WhatsApp number <span class="quote-field-hint">optional</span></label><input id="quote-whatsapp" name="whatsapp" type="tel" autocomplete="tel" inputmode="tel" /></div>
 
-        <div class="quote-form-action"><button class="quote-submit" type="submit">Send Project Enquiry <span aria-hidden="true">↗</span></button><p class="quote-form-status" data-quote-status role="status" aria-live="polite"></p><p class="quote-privacy-note">We’ll use the information you provide to respond to your enquiry and, if you proceed, to manage your project. <a href="privacy.html">Read our Privacy Policy.</a></p></div>
+        <div class="quote-honeypot" aria-hidden="true"><label for="quote-company">Company website</label><input id="quote-company" name="_gotcha" type="text" tabindex="-1" autocomplete="off" /></div>
+        <div class="quote-form-action"><button class="quote-submit" type="submit" data-quote-submit>Send Project Enquiry <span aria-hidden="true">↗</span></button><p class="quote-form-status" data-quote-status role="status" aria-live="polite"></p><p class="quote-privacy-note">We’ll use the information you provide to respond to your enquiry and, if you proceed, to manage your project. <a href="privacy.html">Read our Privacy Policy.</a> If you proceed with a project, the agreed work will also be subject to our <a href="terms.html">Client Terms</a>.</p></div>
+        </div>
+        <section class="quote-success" data-quote-success hidden tabindex="-1" aria-labelledby="quote-success-title">
+          <p class="quote-form-label">ENQUIRY RECEIVED</p>
+          <h2 id="quote-success-title">We’re <em>cooking.</em></h2>
+          <p>Your enquiry is in. Taruz Creative will get back to you shortly.</p>
+          <p class="quote-success-support">You’re all set. You can keep exploring while we review your enquiry.</p>
+          <nav class="quote-success-actions" aria-label="Continue exploring Taruz">
+            <a class="quote-success-primary" href="links.html">Return to Taruz Hub <span aria-hidden="true">↗</span></a>
+            <a class="quote-success-secondary" href="services.html">Back to Services <span aria-hidden="true">→</span></a>
+            <a class="quote-success-tertiary" href="home.html">View Portfolio <span aria-hidden="true">→</span></a>
+          </nav>
+        </section>
       </form>
     </section>
   </main>
-  <footer class="quote-footer"><a href="home.html">← Creative Home</a><a href="privacy.html">Privacy</a><p>© 2026 TARUZ</p></footer>
+  <footer class="quote-footer"><a href="home.html">← Creative Home</a><a href="links.html">Taruz Hub ↗</a><a href="privacy.html">Privacy</a><a href="terms.html">Client Terms</a><p>© 2026 TARUZ</p></footer>
   <script src="creative-category.js"></script>
   <script src="quote.js"></script>
+  <script src="privacy-notice.js"></script>
 </body>
 </html>

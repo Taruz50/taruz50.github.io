@@ -1,0 +1,29 @@
+/* Responsive containment for Taruz Admin; keeps the existing visual system intact. */
+button,input,textarea,select { min-width:0; max-width:100%; box-sizing:border-box; }
+button { width:auto; }
+input,textarea,select { width:100%; }
+.project-admin-shell { grid-template-columns:minmax(20rem,.9fr) minmax(0,1.4fr); width:100%; max-width:100%; overflow-x:clip; }
+.project-admin-form-panel,.project-admin-preview-panel { min-width:0; max-width:100%; }
+.project-admin-preview-panel { overflow-x:clip; }
+.preview-toolbar,.document-tabs,.preview-actions,.document-preview,.document-topline,.document-topline > * { min-width:0; }
+.document-preview { max-width:100%; }
+.suggested-file,.document-reference { overflow-wrap:anywhere; }
+.document-line-items,.document-pricing,.document-summary { min-width:0; max-width:100%; }
+.document-line-items { overflow-x:auto; }
+
+.line-items,.line-item,.line-item-grid,.line-item-grid label,.line-item-total { min-width:0; max-width:100%; }
+.line-item-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+.line-items-actions button { width:auto; }
+.line-items-actions button:hover,.line-items-actions button:focus-visible { background:var(--admin-accent); color:var(--admin-ink); }
+
+@media (max-width:920px) {
+  .project-admin-shell { grid-template-columns:minmax(0,1fr); }
+  .project-admin-preview-panel { position:relative; min-height:auto; }
+  .project-admin-form-panel { border-right:0; border-bottom:1px solid var(--admin-line); }
+}
+
+@media (max-width:600px) {
+  .line-item-grid { grid-template-columns:minmax(0,1fr); }
+  .line-item-total,.remove-line-item { grid-column:1; }
+  .remove-line-item { width:100%; }
+}

@@ -54,4 +54,10 @@
     updateArchive();
   }
 
+  if (!document.querySelector('script[src="privacy-notice.js"]')) {
+    const privacyNotice = document.createElement("script");
+    privacyNotice.src = "privacy-notice.js";
+    document.body.append(privacyNotice);
+  }
+
 })();

@@ -19,6 +19,10 @@ Open the Supabase SQL Editor and run the complete contents of `supabase/migratio
 
 The policies allow an authenticated user to read, create, edit, or delete only rows where `owner_id = auth.uid()`. This means an authenticated user cannot read another user's projects through the public browser API.
 
+### Line-item pricing
+
+No additional schema migration is needed for line items. Each project already has an owner-scoped `data jsonb` payload, and the Admin stores `lineItems` there as an ordered list of description, optional category, quantity and unit price. The top-level `total` and `balance_due` columns remain calculated summaries for listing and reporting. Existing v1 projects without `lineItems` keep using their saved `projectTotal` as a compatibility fallback until you deliberately add a line in the Admin.
+
 ## 4. Add the public client configuration
 
 In **Project Settings → API**, copy only:
@@ -42,6 +46,12 @@ Never add the service-role key, database password, SMTP credentials, or bank det
 Deploy the static site, then bookmark `/admin/` or point `admin.taruzcreate.com` at the deployment. There is intentionally no public-site navigation link to the Admin.
 
 Sign in and create a test project from one device. Open the Admin on a second device with the same login and confirm that the project appears there before using it for client work.
+
+## Public Quote form (Formspree)
+
+The public Quote form is independent of Supabase and the Admin. Create a Formspree form that delivers to the Taruz Creative enquiry inbox, then copy its endpoint (for example, `https://formspree.io/f/abcdwxyz`) into the single `FORMSPREE_ENDPOINT` constant at the top of `quote.js`, replacing `https://formspree.io/f/YOUR_FORM_ID`.
+
+Do not add any Formspree secret, API key, Mailchimp integration, analytics, or tracking code. The Formspree endpoint is designed to be public. Before launch, submit one test enquiry and confirm that the labelled fields, reply email, honeypot protection, and on-page “We’re cooking.” confirmation all work as expected. Formspree then acts as a processor for the information described in `privacy.html`.
 
 ## What v1 does not do
 
