@@ -50,3 +50,69 @@
 .tutorials-hero-image::after { content:""; position:absolute; inset:0; background:linear-gradient(90deg,rgb(17 16 15 / 94%) 0%,rgb(17 16 15 / 74%) 42%,rgb(17 16 15 / 28%) 100%); }
 .tutorials-hero-image img { display:block; width:100%; height:100%; object-fit:cover; object-position:center; }
 @media (max-width:800px) { .tutorials-hero-image::after { background:linear-gradient(180deg,rgb(17 16 15 / 52%),rgb(17 16 15 / 82%) 82%,rgb(17 16 15 / 94%)); } }
+
+/* Cinematic Tutorials introduction. The stage stays in normal document flow; only its contents layer while scrolling. */
+.tutorials-cinematic-intro { --intro-header-height:78px; --intro-back-top:clamp(6.25rem,12svh,9rem); --intro-beat-top:clamp(18rem,42svh,28rem); position:relative; overflow:hidden; padding:clamp(5rem,12vw,8rem) 7vw; background:radial-gradient(circle at 72% 25%,rgb(116 158 44 / 15%),transparent 25%),radial-gradient(circle at 18% 82%,rgb(82 122 50 / 12%),transparent 32%),linear-gradient(140deg,#050705 5%,#0d1610 58%,#060806); color:var(--paper); }
+.tutorials-cinematic-intro.is-animated { min-height:160svh; padding:0; }
+.tutorials-intro-stage { position:relative; min-height:0; overflow:hidden; isolation:isolate; background:transparent; }
+.tutorials-cinematic-intro.is-animated .tutorials-intro-stage { position:sticky; top:var(--intro-header-height); display:grid; place-items:center; min-height:calc(100svh - var(--intro-header-height)); }
+.tutorials-intro-grid { position:absolute; z-index:-4; inset:-12%; background-image:linear-gradient(rgb(206 255 125 / 7%) 1px,transparent 1px),linear-gradient(90deg,rgb(206 255 125 / 7%) 1px,transparent 1px); background-size:clamp(42px,5vw,82px) clamp(42px,5vw,82px); mask-image:radial-gradient(ellipse at center,black,transparent 72%); opacity:.65; transform:translate3d(0,var(--parallax-y,0),0) scale(1.08); }
+.tutorials-intro-blur { position:absolute; z-index:-3; width:clamp(220px,32vw,540px); aspect-ratio:1; border-radius:50%; filter:blur(34px); opacity:.32; transform:translate3d(0,var(--parallax-y,0),0); }
+.tutorials-intro-blur--one { top:-10%; right:-5%; background:#86af48; }
+.tutorials-intro-blur--two { bottom:-18%; left:11%; width:clamp(190px,24vw,410px); background:#2a5b38; opacity:.42; }
+.tutorials-intro-guides { position:absolute; z-index:-2; inset:8% 8%; opacity:.45; transform:translate3d(0,var(--parallax-y,0),0); }
+.tutorials-intro-guides span { position:absolute; display:block; background:rgb(218 255 173 / 32%); }
+.tutorials-intro-guides span:nth-child(1),.tutorials-intro-guides span:nth-child(2) { width:1px; height:100%; top:0; }
+.tutorials-intro-guides span:nth-child(1) { left:8%; }.tutorials-intro-guides span:nth-child(2) { right:16%; }
+.tutorials-intro-guides span:nth-child(3),.tutorials-intro-guides span:nth-child(4) { width:18%; height:1px; }
+.tutorials-intro-guides span:nth-child(3) { top:6%; right:0; }.tutorials-intro-guides span:nth-child(4) { bottom:12%; left:0; }
+.tutorials-intro-type-fragment { position:absolute; z-index:-2; right:-.08em; bottom:4%; color:rgb(211 255 122 / 11%); font:italic 500 clamp(9rem,28vw,30rem)/.65 var(--serif); letter-spacing:-.11em; opacity:var(--fragment-opacity,1); transform:translate3d(0,var(--parallax-y,0),0); user-select:none; }
+.tutorials-intro-paper { position:absolute; z-index:-1; top:19%; right:15%; width:clamp(125px,14vw,220px); aspect-ratio:.72; padding:1rem; border:1px solid rgb(232 243 208 / 25%); background:linear-gradient(135deg,rgb(220 235 192 / 15%),rgb(220 235 192 / 2%)); box-shadow:14px 16px 40px rgb(0 0 0 / 20%); color:rgb(229 247 198 / 64%); font:500 .52rem/1 var(--mono); letter-spacing:.12em; transform:rotate(8deg) translate3d(0,var(--parallax-y,0),0); }
+.tutorials-intro-paper::before,.tutorials-intro-paper::after { content:""; position:absolute; width:10px; height:10px; border-color:rgb(218 255 173 / 70%); border-style:solid; }.tutorials-intro-paper::before { top:-4px; left:-4px; border-width:1px 0 0 1px; }.tutorials-intro-paper::after { right:-4px; bottom:-4px; border-width:0 1px 1px 0; }
+.tutorials-intro-paper i { display:block; width:100%; height:1px; margin-top:1rem; background:rgb(229 247 198 / 26%); }.tutorials-intro-paper i:last-child { width:62%; }
+.tutorials-intro-mark { position:absolute; width:clamp(28px,4vw,56px); height:clamp(28px,4vw,56px); border-color:rgb(210 255 135 / 48%); border-style:solid; transform:translate3d(0,var(--parallax-y,0),0); }.tutorials-intro-mark--left { left:10%; top:25%; border-width:1px 0 0 1px; }.tutorials-intro-mark--right { right:7%; bottom:18%; border-width:0 1px 1px 0; }
+.tutorials-intro-back { position:relative; z-index:2; display:inline-block; margin:0; }
+.tutorials-cinematic-intro.is-animated .tutorials-intro-back { position:absolute; top:var(--intro-back-top); left:7vw; }
+.tutorials-intro-copy { position:relative; z-index:1; width:100%; margin-top:clamp(5rem,13vw,8rem); }
+.tutorials-cinematic-intro.is-animated .tutorials-intro-copy { position:static; width:auto; min-height:0; margin:0; padding:0; }
+.tutorials-intro-beat { position:relative; display:block; opacity:1; transform:none; }
+.tutorials-intro-beat + .tutorials-intro-beat { margin-top:clamp(5rem,12vw,8rem); }
+.tutorials-cinematic-intro.is-animated .tutorials-intro-beat { position:absolute; top:var(--intro-beat-top); left:50%; width:min(100% - 14vw,1100px); margin:0; opacity:var(--beat-opacity,1); transform:translate3d(-50%,var(--beat-shift,0),0); transition:none; }
+.tutorials-intro-kicker,.tutorials-intro-principle,.tutorials-intro-beat--signature > p { margin:0; color:#c8ff50; font:500 clamp(.58rem,.8vw,.68rem)/1.4 var(--mono); letter-spacing:.15em; }
+.tutorials-intro-principle { margin-top:1.2rem; color:var(--bone); }
+.tutorials-intro-beat h1 { max-width:900px; margin:clamp(1.7rem,4vw,3.8rem) 0 0; font:500 clamp(3.4rem,9vw,10rem)/.77 var(--serif); letter-spacing:-.085em; }
+.tutorials-intro-beat h1 em,.tutorials-intro-beat--force em,.tutorials-intro-beat--signature h2 em { color:#c8ff50; font-weight:500; }
+.tutorials-intro-beat--force { justify-items:end; text-align:right; }.tutorials-intro-beat--force p { max-width:760px; margin:0; font:500 clamp(3.4rem,8.4vw,9rem)/.8 var(--serif); letter-spacing:-.08em; }
+.tutorials-intro-beat--signature { justify-items:center; text-align:center; }.tutorials-intro-beat--signature h2 { margin:1.05rem 0 0; font:500 clamp(2.5rem,4.5vw,5rem)/.84 var(--serif); letter-spacing:-.075em; }
+.tutorials-cinematic-intro.is-animated .tutorials-intro-beat--force p { margin-left:auto; }
+.tutorials-intro-scroll { display:none; position:absolute; z-index:2; bottom:clamp(1.6rem,4vw,3.5rem); left:7vw; margin:0; color:rgb(231 226 215 / 62%); font:500 .56rem/1 var(--mono); letter-spacing:.14em; }.tutorials-cinematic-intro.is-animated .tutorials-intro-scroll { display:block; }.tutorials-intro-scroll span { display:inline-block; margin-left:.6rem; color:#c8ff50; font-size:1rem; animation:tutorials-scroll-pulse 1.8s ease-in-out infinite; }
+@keyframes tutorials-scroll-pulse { 50% { transform:translateY(5px); opacity:.55; } }
+@media (max-width:800px) { .tutorials-cinematic-intro { --intro-header-height:70px; } }
+@media (max-width:900px) { .tutorials-cinematic-intro { --intro-back-top:clamp(5.75rem,11svh,7rem); --intro-beat-top:clamp(18rem,40svh,25rem); }.tutorials-cinematic-intro.is-animated { min-height:165svh; }.tutorials-intro-paper { right:8%; }.tutorials-intro-type-fragment { bottom:10%; }.tutorials-intro-guides { inset:10% 6%; } }
+@media (max-width:700px) { .tutorials-cinematic-intro { --intro-back-top:max(5.5rem,12svh); --intro-beat-top:clamp(18rem,43svh,25rem); }.tutorials-cinematic-intro.is-animated { min-height:215svh; }.tutorials-cinematic-intro.is-animated .tutorials-intro-stage { min-height:calc(100svh - var(--intro-header-height)); }.tutorials-intro-grid { opacity:.38; }.tutorials-intro-guides,.tutorials-intro-paper,.tutorials-intro-mark { display:none; }.tutorials-intro-blur--one { right:-22%; opacity:.25; }.tutorials-intro-blur--two { left:-18%; opacity:.28; }.tutorials-intro-type-fragment { right:-.12em; bottom:15%; color:rgb(211 255 122 / 8%); font-size:clamp(7rem,34vw,14rem); }.tutorials-cinematic-intro.is-animated .tutorials-intro-beat { width:86vw; }.tutorials-intro-beat h1 { font-size:clamp(3.2rem,15vw,5.5rem); }.tutorials-intro-beat--force p { font-size:clamp(3rem,14vw,5rem); }.tutorials-intro-beat--signature h2 { font-size:clamp(1.9rem,7.5vw,3rem); }.tutorials-intro-back,.tutorials-intro-scroll { left:7vw; } }
+
+/* Phones use four normal-flow editorial chapters, never a sticky progress timeline. */
+@media (max-width:700px) {
+  .tutorials-cinematic-intro.is-mobile-flow { padding:0; }
+  .tutorials-cinematic-intro.is-mobile-flow .tutorials-intro-stage { display:block; min-height:0; overflow:hidden; }
+  .tutorials-cinematic-intro.is-mobile-flow .tutorials-intro-grid { inset:0; opacity:.3; mask-image:linear-gradient(180deg,transparent,black 10%,black 90%,transparent); }
+  .tutorials-cinematic-intro.is-mobile-flow .tutorials-intro-blur--one { top:9%; right:-38%; opacity:.2; }
+  .tutorials-cinematic-intro.is-mobile-flow .tutorials-intro-blur--two { bottom:12%; left:-34%; opacity:.22; }
+  .tutorials-cinematic-intro.is-mobile-flow .tutorials-intro-guides,
+  .tutorials-cinematic-intro.is-mobile-flow .tutorials-intro-paper,
+  .tutorials-cinematic-intro.is-mobile-flow .tutorials-intro-mark,
+  .tutorials-cinematic-intro.is-mobile-flow .tutorials-intro-type-fragment,
+  .tutorials-cinematic-intro.is-mobile-flow .tutorials-intro-back,
+  .tutorials-cinematic-intro.is-mobile-flow .tutorials-intro-scroll { display:none; }
+  .tutorials-cinematic-intro.is-mobile-flow .tutorials-intro-copy { position:relative; z-index:1; width:100%; margin:0; }
+  .tutorials-cinematic-intro.is-mobile-flow .tutorials-intro-beat { position:relative; display:flex; flex-direction:column; justify-content:center; width:100%; min-height:clamp(20rem,50svh,32rem); margin:0; padding:clamp(4.5rem,10svh,6.5rem) 7vw clamp(3.5rem,8svh,5rem); opacity:0; transform:translate3d(0,1.5rem,0) scale(.985); transition:opacity .7s ease,transform .8s cubic-bezier(.2,.7,.2,1); }
+  .tutorials-cinematic-intro.is-mobile-flow .tutorials-intro-beat.is-revealed { opacity:1; transform:translate3d(0,0,0) scale(1); }
+  .tutorials-cinematic-intro.is-mobile-flow .tutorials-intro-beat--opening { min-height:clamp(22rem,56svh,34rem); }
+  .tutorials-cinematic-intro.is-mobile-flow .tutorials-intro-beat--rest,
+  .tutorials-cinematic-intro.is-mobile-flow .tutorials-intro-beat--force { min-height:clamp(19rem,47svh,30rem); }
+  .tutorials-cinematic-intro.is-mobile-flow .tutorials-intro-beat--force { justify-items:normal; text-align:right; }
+  .tutorials-cinematic-intro.is-mobile-flow .tutorials-intro-beat--force p { margin-left:auto; }
+  .tutorials-cinematic-intro.is-mobile-flow .tutorials-intro-beat--signature { min-height:clamp(15rem,36svh,22rem); padding-top:clamp(3.5rem,8svh,5rem); padding-bottom:clamp(3rem,6svh,4rem); justify-items:normal; text-align:center; }
+  .tutorials-cinematic-intro.is-mobile-flow .tutorials-intro-beat--signature h2 { font-size:clamp(1.9rem,7.5vw,3rem); }
+}
+@media (prefers-reduced-motion:reduce) { .tutorials-intro-stage { display:block; overflow:visible; background:radial-gradient(circle at 80% 20%,rgb(116 158 44 / 18%),transparent 34%),#0a100b; }.tutorials-intro-grid { inset:0; mask-image:none; opacity:.28; }.tutorials-intro-blur,.tutorials-intro-type-fragment { display:none; }.tutorials-intro-guides { display:block; inset:0; opacity:.22; }.tutorials-intro-beat--force { text-align:left; }.tutorials-intro-beat--signature { text-align:left; }.tutorials-intro-beat h1,.tutorials-intro-beat--force p,.tutorials-intro-beat--signature h2 { max-width:900px; }.tutorials-intro-beat--signature h2 { margin-top:1rem; } .tutorials-cinematic-intro.is-mobile-flow .tutorials-intro-beat { opacity:1; transform:none; transition:none; } }

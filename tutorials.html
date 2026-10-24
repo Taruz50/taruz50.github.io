@@ -40,14 +40,35 @@
     </nav>
   </header>
   <main>
-    <section class="process-index-hero" aria-labelledby="process-index-title">
-      <div data-reveal>
-        <a class="process-back-link" href="home.html">← Creative Home</a>
-        <p class="process-index-kicker">TARUZ / CREATIVE PRACTICE</p>
-        <h1 id="process-index-title">Tutorials<em>.</em></h1>
+    <section class="tutorials-cinematic-intro" aria-labelledby="process-index-title" data-tutorial-intro>
+      <div class="tutorials-intro-stage">
+        <div class="tutorials-intro-grid" aria-hidden="true" data-parallax="-0.18"></div>
+        <div class="tutorials-intro-blur tutorials-intro-blur--one" aria-hidden="true" data-parallax="-0.08"></div>
+        <div class="tutorials-intro-blur tutorials-intro-blur--two" aria-hidden="true" data-parallax="0.12"></div>
+        <div class="tutorials-intro-guides" aria-hidden="true" data-parallax="0.26"><span></span><span></span><span></span><span></span></div>
+        <div class="tutorials-intro-type-fragment" aria-hidden="true" data-parallax="0.18">FORM</div>
+        <div class="tutorials-intro-paper" aria-hidden="true" data-parallax="0.34"><span>01 / 02</span><i></i><i></i></div>
+        <div class="tutorials-intro-mark tutorials-intro-mark--left" aria-hidden="true" data-parallax="0.4"></div>
+        <div class="tutorials-intro-mark tutorials-intro-mark--right" aria-hidden="true" data-parallax="0.48"></div>
+        <a class="process-back-link tutorials-intro-back" href="home.html">← Creative Home</a>
+        <div class="tutorials-intro-copy">
+          <div class="tutorials-intro-beat tutorials-intro-beat--opening" data-intro-beat="opening">
+            <p class="tutorials-intro-kicker">TARUZ</p>
+            <p class="tutorials-intro-principle">THE CREATIVE PRINCIPLE</p>
+          </div>
+          <div class="tutorials-intro-beat tutorials-intro-beat--rest" data-intro-beat="rest">
+            <h1 id="process-index-title">An image remains <em>at rest.</em></h1>
+          </div>
+          <div class="tutorials-intro-beat tutorials-intro-beat--force" data-intro-beat="force">
+            <p>Until creativity becomes <em>the force.</em></p>
+          </div>
+          <div class="tutorials-intro-beat tutorials-intro-beat--signature" data-intro-beat="signature">
+            <p>TARUZ</p>
+            <h2>Design in <em>Motion.</em></h2>
+          </div>
+        </div>
+        <p class="tutorials-intro-scroll" aria-hidden="true">SCROLL TO ENTER <span>↓</span></p>
       </div>
-      <p class="process-index-intro" data-reveal>Creative process, design breakdowns, speed runs and practical walkthroughs. A growing record of how ideas become finished work.</p>
-      <figure class="tutorials-hero-image" aria-hidden="true"><img src="assets/social/tutorials-hero.png" alt="" /></figure>
     </section>
     <section class="process-list-section" id="tutorials" aria-labelledby="tutorials-title">
       <div class="process-list-heading" data-reveal>
@@ -115,5 +136,6 @@
   </div>
   <script src="creative-category.js"></script>
   <script src="media-lightbox.js"></script>
+  <script src="tutorials-intro.js"></script>
 </body>
 </html>
