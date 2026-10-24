@@ -50,7 +50,7 @@ body.creative-gallery > nav .nav__logo img.creative-logo { display:block; width:
 .design-image-button img { display:block; width:100%; height:auto; transition:transform .65s cubic-bezier(.2,.6,.2,1); }
 .design-image-button:hover img { transform:scale(1.025); }
 .design-image-button:focus-visible { outline:2px solid var(--wine); outline-offset:7px; }
-.design-work figcaption { margin-top:.8rem; font:.57rem/1.4 var(--mono); letter-spacing:.1em; text-transform:uppercase; color:var(--wine); }
+.design-work figcaption { margin-top:.8rem; font:.57rem/1.4 var(--mono); letter-spacing:.1em; text-transform:uppercase; color:var(--wine); }.design-work figcaption.design-work-caption { display:grid; gap:.22rem; }.design-work-caption strong { color:var(--ink); font:500 .62rem/1.35 var(--mono); }.design-work-caption span { color:var(--wine); }
 .design-dominant { max-width:690px; }
 .design-offsets { display:flex; flex-direction:column; gap:clamp(3rem,10vw,9rem); padding-top:clamp(3rem,8vw,7rem); }
 .design-offset-first { width:88%; }
