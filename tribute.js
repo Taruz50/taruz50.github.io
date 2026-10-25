@@ -1,6 +1,7 @@
 (() => {
   requestAnimationFrame(() => document.body.classList.add("is-ready"));
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   const reveals = document.querySelectorAll("[data-tribute-reveal]");
   if (reduced || !("IntersectionObserver" in window)) {
     reveals.forEach((el) => el.classList.add("is-visible"));
@@ -17,7 +18,7 @@
 
   const stage = document.querySelector("[data-paint-stage]");
   const trigger = document.querySelector("[data-paint-trigger]");
-  if (stage && !reduced) {
+  if (stage && !reduced && finePointer) {
     stage.addEventListener("pointermove", (event) => {
       const r = stage.getBoundingClientRect();
       const x = (event.clientX - r.left) / r.width - 0.5;
