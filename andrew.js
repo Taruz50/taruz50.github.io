@@ -1,6 +1,7 @@
 (() => {
   requestAnimationFrame(() => document.body.classList.add("is-ready"));
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   const reveals = document.querySelectorAll("[data-story-beat], [data-reveal]");
 
   if (reduced || !("IntersectionObserver" in window)) {
@@ -55,7 +56,7 @@
 
   const hero = document.querySelector(".personal-hero");
   const heroFrame = document.querySelector(".hero-frame");
-  if (hero && heroFrame && !reduced) {
+  if (hero && heroFrame && !reduced && finePointer) {
     hero.addEventListener("pointermove", (event) => {
       const rect = hero.getBoundingClientRect();
       const x = (event.clientX - rect.left) / rect.width - 0.5;
