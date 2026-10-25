@@ -10,17 +10,24 @@
   <link rel="manifest" href="site.webmanifest" />
   <meta name="description" content="The personal side of Andrew Taruvinga — story, poetry and the people who shaped the work." />
   <link rel="canonical" href="https://taruzcreate.com/andrew.html" />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
   <link rel="stylesheet" href="andrew.css" />
+  <link rel="stylesheet" href="personal-shell.css" />
   <title>Andrew — Story, Poetry & Tribute</title>
 </head>
 <body>
-  <header class="personal-header">
-    <a class="personal-brand" href="andrew.html" aria-label="Andrew personal home">ANDREW / TARUZ</a>
-    <nav class="personal-nav" aria-label="Personal navigation">
-      <a href="#story">Story</a>
-      <a href="#poetry">Poetry</a>
-      <a href="#tribute">Tribute</a>
-      <a class="back-link" href="home.html">Back to Taruz Creative ↗</a>
+  <header class="personal-site-header" data-personal-header>
+    <nav class="personal-site-nav" aria-label="Personal navigation">
+      <div class="personal-nav-header">
+        <a class="personal-shell-brand" href="andrew.html" aria-label="Andrew personal home"><img src="assets/Taruz.png" alt="Taruz" /></a>
+        <button class="personal-menu-btn" type="button" aria-label="Open navigation" aria-expanded="false" data-personal-menu-btn><i class="ri-menu-line" aria-hidden="true"></i></button>
+      </div>
+      <ul class="personal-shell-links" data-personal-nav-links>
+        <li><a aria-current="page" href="andrew.html#story">Story</a></li>
+        <li><a href="poetry.html">Poetry</a></li>
+        <li><a href="tribute.html">Tribute</a></li>
+        <li><a class="quiet-link" href="home.html">Taruz Creative ↗</a></li>
+      </ul>
     </nav>
   </header>
 
@@ -207,6 +214,7 @@
     <a href="privacy.html">Privacy</a>
   </footer>
   <script src="andrew.js"></script>
+  <script src="personal-shell.js"></script>
   <script src="privacy-notice.js"></script>
 </body>
 </html>
