@@ -20,3 +20,37 @@ body.is-ready .enter{animation:poetryEnterIn .7s .45s ease both}
 @keyframes poetryEnterIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 @media(max-width:850px){.reading-room:hover .reading-sample{transform:rotate(-1deg)}}
 @media(prefers-reduced-motion:reduce){body.is-ready .poetry-hero>div:first-child,body.is-ready .poetry-orbit,body.is-ready .enter{animation:none}.poem-card::after{display:none}}
+
+
+/* Dedicated mobile polish */
+@media(max-width:520px){
+  .poetry-header{padding:1rem 1.1rem}
+  .poetry-brand{font-size:.62rem}
+  .poetry-header nav{gap:.7rem .9rem;font-size:.54rem;line-height:1.25}
+  .poetry-header nav a{padding:.2rem 0}
+  .poetry-hero{min-height:92svh;padding:4.8rem 1.2rem 5.2rem}
+  .poetry-hero h1{font-size:clamp(3.75rem,16.8vw,5rem);line-height:.82;letter-spacing:-.065em}
+  .intro{margin-top:1.7rem;font-size:.96rem;line-height:1.62}
+  .poetry-orbit{right:-28vw;top:58%;width:88vw;opacity:.28}
+  .enter{left:1.2rem;bottom:1.35rem;min-height:44px;display:flex;align-items:center}
+  .archive{padding:5.5rem 1.2rem}
+  .archive-head h2{font-size:clamp(3.5rem,15vw,4.8rem);line-height:.84}
+  .poem-shelf{gap:1rem;margin-top:3.4rem}
+  .poem-card{min-height:340px;padding:1.2rem}
+  .poem-state{margin-top:3.5rem}
+  .poem-card h3{font-size:clamp(2.6rem,11.5vw,3.7rem)}
+  .poem-copy{font-size:.95rem;line-height:1.65}
+  .poem-card button,.poem-tag{left:1.2rem;bottom:1.2rem;min-height:44px;display:flex;align-items:center}
+  .reading-room{padding:5.5rem 1.2rem}
+  .reading-room h2{font-size:clamp(3.7rem,16vw,5rem)}
+  .reading-sample{width:86vw;margin:2.5rem 0 0;padding:2.2rem;box-shadow:12px 14px 0 rgb(0 0 0 / 18%)}
+  .reading-note{font-size:.95rem;line-height:1.65}
+  .poetry-close{padding:6rem 1.2rem}
+  .poetry-close h2{font-size:clamp(3.7rem,16vw,5.1rem)}
+  footer{padding:1.2rem}
+}
+@media(hover:none),(pointer:coarse){
+  .poem-card:hover,.poem-card:focus-visible{transform:none}
+  .poem-card::after{display:none}
+  .reading-room:hover .reading-sample{transform:rotate(1deg);box-shadow:12px 14px 0 rgb(0 0 0 / 18%)}
+}
