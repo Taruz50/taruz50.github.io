@@ -18,6 +18,7 @@
 
   const stage = document.querySelector("[data-paint-stage]");
   const trigger = document.querySelector("[data-paint-trigger]");
+  const reset = document.querySelector("[data-paint-reset]");
   if (stage && !reduced && finePointer) {
     stage.addEventListener("pointermove", (event) => {
       const r = stage.getBoundingClientRect();
@@ -31,9 +32,21 @@
   }
 
   if (stage && trigger) {
-    trigger.addEventListener("click", () => {
-      const revealed = stage.classList.toggle("is-revealed");
-      trigger.textContent = revealed ? "COVER THE PORTRAIT" : "REVEAL THE PORTRAIT";
-    });
+    const revealPortrait = () => {
+      stage.classList.add("is-revealed");
+      trigger.textContent = "PORTRAIT REVEALED";
+      trigger.disabled = true;
+      if (reset) reset.hidden = false;
+    };
+
+    const resetPortrait = () => {
+      stage.classList.remove("is-revealed");
+      trigger.textContent = "REVEAL THE PORTRAIT";
+      trigger.disabled = false;
+      if (reset) reset.hidden = true;
+    };
+
+    trigger.addEventListener("click", revealPortrait);
+    reset?.addEventListener("click", resetPortrait);
   }
 })();
