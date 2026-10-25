@@ -1,6 +1,7 @@
 (() => {
   requestAnimationFrame(() => document.body.classList.add("is-ready"));
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   const items = document.querySelectorAll("[data-poetry-reveal]");
   if (reduced || !("IntersectionObserver" in window)) {
     items.forEach((el) => el.classList.add("is-visible"));
@@ -16,7 +17,7 @@
   items.forEach((el) => observer.observe(el));
 
   document.querySelectorAll(".poem-card").forEach((card) => {
-    if (reduced) return;
+    if (reduced || !finePointer) return;
     card.addEventListener("pointermove", (event) => {
       const r = card.getBoundingClientRect();
       const x = (event.clientX - r.left) / r.width - 0.5;
