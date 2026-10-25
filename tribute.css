@@ -165,6 +165,7 @@ body.is-ready .paint-trigger{animation:tributeTriggerIn .7s .4s ease both}
   }
 }
 @media(prefers-reduced-motion:reduce){
-  .paint-photo{opacity:1;transform:none;transition:none}
+  .paint-photo{transition:none}
+  .paint-stage.is-revealed .paint-photo{opacity:1;transform:none}
   .paint-splatters i{display:none}
 }
