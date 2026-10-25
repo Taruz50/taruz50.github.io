@@ -51,4 +51,15 @@
   updateMotion();
   window.addEventListener("scroll", requestUpdate, { passive: true });
   window.addEventListener("resize", requestUpdate);
+
+  document.querySelectorAll(".early-work__image").forEach((img) => {
+    const frame = img.closest(".early-work__frame");
+    const markMissing = () => {
+      img.hidden = true;
+      if (frame) frame.classList.add("is-missing");
+    };
+    img.addEventListener("error", markMissing, { once: true });
+    if (img.complete && img.naturalWidth === 0) markMissing();
+  });
+
 })();
