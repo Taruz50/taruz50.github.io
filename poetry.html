@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#07120b" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" sizes="180x180" />
+  <link rel="manifest" href="site.webmanifest" />
+  <meta name="description" content="Poetry and fragments by Andrew Taruvinga." />
+  <link rel="canonical" href="https://taruzcreate.com/poetry.html" />
+  <link rel="stylesheet" href="poetry.css" />
+  <title>Andrew — Poetry</title>
+</head>
+<body>
+  <header class="poetry-header">
+    <a href="andrew.html" class="poetry-brand">ANDREW / TARUZ</a>
+    <nav aria-label="Poetry navigation">
+      <a href="andrew.html#story">Story</a>
+      <a aria-current="page" href="poetry.html">Poetry</a>
+      <a href="tribute.html">Tribute</a>
+      <a class="back" href="home.html">Creative ↗</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="poetry-hero">
+      <div>
+        <p class="eyebrow">POETRY / FRAGMENTS / NOTES</p>
+        <h1>Some things<br />only make sense<br /><em>when written.</em></h1>
+        <p class="intro">A quiet archive for poems, fragments and thoughts that do not belong inside a portfolio caption.</p>
+      </div>
+      <div class="poetry-orbit" aria-hidden="true">
+        <span>WORDS</span><span>MEMORY</span><span>FAITH</span><span>WEIGHT</span>
+      </div>
+      <a class="enter" href="#archive">ENTER THE ARCHIVE <span>↓</span></a>
+    </section>
+
+    <section class="archive" id="archive" aria-labelledby="archive-title">
+      <div class="archive-head" data-poetry-reveal>
+        <p>ARCHIVE / OPENING</p>
+        <h2 id="archive-title">Not everything<br /><em>needs explaining.</em></h2>
+      </div>
+
+      <div class="poem-shelf">
+        <article class="poem-card poem-card--available" data-poetry-reveal tabindex="0">
+          <span class="poem-no">01</span>
+          <p class="poem-state">FIRST ENTRY</p>
+          <h3>The archive begins here.</h3>
+          <p class="poem-copy">Your first selected poem will live here exactly as written — with space, rhythm and no unnecessary decoration around it.</p>
+          <button type="button" data-open-reader disabled>POEM TO BE ADDED</button>
+        </article>
+
+        <article class="poem-card" data-poetry-reveal tabindex="0">
+          <span class="poem-no">02</span>
+          <p class="poem-state">FRAGMENT</p>
+          <h3>Short pieces can breathe too.</h3>
+          <p class="poem-copy">Fragments, unfinished thoughts and smaller pieces can sit beside longer poems without pretending to be complete.</p>
+          <span class="poem-tag">COMING SOON</span>
+        </article>
+
+        <article class="poem-card poem-card--dark" data-poetry-reveal tabindex="0">
+          <span class="poem-no">03</span>
+          <p class="poem-state">PRIVATE LANGUAGE</p>
+          <h3>Some writing stays difficult on purpose.</h3>
+          <p class="poem-copy">The archive will preserve ambiguity instead of translating every line into something easier to consume.</p>
+          <span class="poem-tag">COMING SOON</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="reading-room" data-poetry-reveal>
+      <p>READING MODE</p>
+      <h2>One poem.<br /><em>One page.</em><br />Nothing else.</h2>
+      <div class="reading-sample" aria-hidden="true">
+        <span class="line line--1"></span>
+        <span class="line line--2"></span>
+        <span class="line line--3"></span>
+        <span class="line line--4"></span>
+      </div>
+      <p class="reading-note">When the poems are added, opening one will quiet the interface and let the writing take over the screen.</p>
+    </section>
+
+    <section class="poetry-close">
+      <p>THE ARCHIVE IS DELIBERATELY SMALL.</p>
+      <h2>Only what deserves<br /><em>to stay.</em></h2>
+      <a href="andrew.html">Back to Andrew <span>↗</span></a>
+    </section>
+  </main>
+
+  <footer><span>© 2026 ANDREW TARUVINGA</span><a href="privacy.html">Privacy</a></footer>
+  <script src="poetry.js"></script>
+  <script src="privacy-notice.js"></script>
+</body>
+</html>
