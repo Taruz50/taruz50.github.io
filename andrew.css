@@ -106,3 +106,7 @@
 
 @media(max-width:700px){.early-work__gallery{grid-template-columns:1fr}.early-work__piece--two{margin-top:1rem}.early-work::before{display:none}}
 @media(prefers-reduced-motion:reduce){.early-work.is-visible .early-work__piece--one,.early-work.is-visible .early-work__piece--two{animation:none;transform:none}}
+
+.chapter-jump--light{border-color:var(--moss);color:var(--paper)}
+.chapter-jump--light span{color:var(--moss)}
+.chapter--poetry .chapter-jump--light:hover{color:var(--moss)}
