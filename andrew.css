@@ -127,3 +127,44 @@ body.is-ready .hero-scroll{animation:heroScrollIn .7s .45s ease both}
 @keyframes heroScrollIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 @keyframes heroSweep{0%,68%{transform:translateX(-120%)}82%,100%{transform:translateX(120%)}}
 @media(prefers-reduced-motion:reduce){body.is-ready .hero-copy,body.is-ready .hero-frame,body.is-ready .hero-scroll,.personal-hero::after{animation:none}}
+
+
+/* Dedicated mobile polish */
+@media(max-width:520px){
+  .personal-header{padding:1rem 1.1rem}
+  .personal-brand{font-size:.62rem}
+  .personal-nav{gap:.7rem .9rem;font-size:.54rem;line-height:1.25}
+  .personal-nav a{padding:.2rem 0}
+  .personal-hero{padding:4.8rem 1.2rem 5.4rem;gap:1.4rem}
+  .hero-copy h1{font-size:clamp(3.55rem,16.5vw,5rem);line-height:.82;letter-spacing:-.065em}
+  .hero-intro{margin-top:1.6rem;font-size:.96rem;line-height:1.62}
+  .hero-frame{width:min(86vw,360px);margin:1.4rem 0 3.2rem auto}
+  .hero-scroll{left:1.2rem;bottom:1.35rem}
+  .chapter{padding:5.5rem 1.2rem}
+  .chapter h2{font-size:clamp(3.45rem,15vw,4.9rem);line-height:.84}
+  .chapter-text{font-size:.96rem;line-height:1.68}
+  .chapter-jump{min-height:44px;align-items:center}
+  .chapter-note{font-size:1.45rem}
+  .story-beat{padding:5rem 1.1rem 5rem 3rem}
+  .story-year{left:.8rem;top:2.8rem}
+  .story-beat__copy h3{font-size:clamp(3rem,13.5vw,4.45rem);line-height:.86}
+  .story-beat__copy>p:not(.story-label):not(.story-small){font-size:.96rem;line-height:1.68}
+  .story-visual{width:min(86vw,360px)}
+  .story-practice span{font-size:.9rem;padding:.72rem .82rem}
+  .story-practice span:nth-child(2),.story-practice span:nth-child(3),.story-practice span:nth-child(4){margin-left:0}
+  .story-stamp{width:min(220px,70vw)}
+  .story-final{font-size:clamp(3rem,13vw,4.4rem)}
+  .story-interlude{padding:5.5rem 1.2rem}
+  .story-interlude h3{font-size:clamp(3.25rem,14vw,4.7rem)}
+  .early-work{padding:5.5rem 1.2rem}
+  .early-work__intro h3{font-size:clamp(3.2rem,14vw,4.8rem)}
+  .early-work__piece--one,.early-work__piece--two{transform:none}
+  .early-work__note{font-size:clamp(2.2rem,10vw,3.4rem)}
+  .personal-close{padding:6rem 1.2rem}
+  .personal-close h2{font-size:clamp(3.7rem,16vw,5.2rem)}
+  .personal-footer{padding:1.2rem}
+}
+@media(hover:none),(pointer:coarse){
+  .chapter-jump:hover,.story-beat.is-visible:hover .story-beat__copy h3,.early-work.is-visible:hover .early-work__intro h3,.story-disciplines span:hover,.early-work__piece:hover,.early-work__piece--one:hover,.early-work__piece--two:hover{transform:none}
+  .personal-hero::after{animation:none}
+}
