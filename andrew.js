@@ -1,4 +1,5 @@
 (() => {
+  requestAnimationFrame(() => document.body.classList.add("is-ready"));
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const reveals = document.querySelectorAll("[data-story-beat], [data-reveal]");
 
@@ -51,6 +52,20 @@
   updateMotion();
   window.addEventListener("scroll", requestUpdate, { passive: true });
   window.addEventListener("resize", requestUpdate);
+
+  const hero = document.querySelector(".personal-hero");
+  const heroFrame = document.querySelector(".hero-frame");
+  if (hero && heroFrame && !reduced) {
+    hero.addEventListener("pointermove", (event) => {
+      const rect = hero.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width - 0.5;
+      const y = (event.clientY - rect.top) / rect.height - 0.5;
+      heroFrame.style.transform = `translate3d(${(x * 10).toFixed(1)}px,${(y * 8).toFixed(1)}px,0) rotate(${(x * 1.2).toFixed(2)}deg)`;
+    });
+    hero.addEventListener("pointerleave", () => {
+      heroFrame.style.transform = "";
+    });
+  }
 
   document.querySelectorAll(".early-work__image").forEach((img) => {
     const frame = img.closest(".early-work__frame");
