@@ -12,3 +12,13 @@
 @media(max-width:850px){.tribute-header{position:relative;align-items:flex-start}.tribute-header nav{flex-wrap:wrap;justify-content:flex-end}.tribute-hero{min-height:auto;grid-template-columns:1fr}.paint-stage{justify-self:start;width:min(80vw,430px);margin:2rem 0 4rem}.paint-trigger{position:static;justify-self:start}.mentor-story,.mentor-method,.mentor-legacy{grid-template-columns:1fr;min-height:auto}.approval-mark{position:relative;right:auto;bottom:auto;width:min(260px,70vw);margin-top:3rem}}
 @media(max-width:520px){.tribute-header{display:block}.tribute-header nav{justify-content:flex-start;margin-top:1rem;gap:.8rem 1rem}.tribute-header .back{width:100%;padding:0;border:0}.tribute-hero,.mentor-story,.mentor-method,.mentor-moment,.mentor-legacy,.tribute-close{padding-inline:1.5rem}.tribute-copy h1{font-size:clamp(4.2rem,18vw,5.8rem)}footer{flex-direction:column;gap:.7rem}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.paint-strokes i{transition:none}.paint-stage .paint-strokes{display:none}[data-tribute-reveal]{opacity:1;transform:none;transition:none}.mentor-moment.is-visible .approval-mark{animation:none}}
+body.is-ready .tribute-copy{animation:tributeHeroIn .9s cubic-bezier(.2,.7,.2,1) both}
+body.is-ready .paint-stage{animation:tributeStageIn 1s .1s cubic-bezier(.2,.7,.2,1) both}
+body.is-ready .paint-trigger{animation:tributeTriggerIn .7s .4s ease both}
+.paint-stage{transition:transform .35s ease}.paint-stage:hover{transform:translateY(-5px) rotate(.4deg)}
+.method-stack span,.legacy-grid span{transition:transform .25s ease,background .25s ease}.method-stack span:hover,.legacy-grid span:hover{transform:translateX(8px);background:rgb(255 255 255 / 8%)}
+.approval-mark{transition:transform .35s ease}.mentor-moment:hover .approval-mark{transform:rotate(-3deg) scale(1.03)}
+@keyframes tributeHeroIn{from{opacity:0;transform:translate3d(-28px,34px,0)}to{opacity:1;transform:none}}
+@keyframes tributeStageIn{from{opacity:0;transform:translate3d(36px,40px,0) rotate(2deg)}to{opacity:1;transform:none}}
+@keyframes tributeTriggerIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){body.is-ready .tribute-copy,body.is-ready .paint-stage,body.is-ready .paint-trigger{animation:none}.paint-stage:hover,.mentor-moment:hover .approval-mark{transform:none}}
