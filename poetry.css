@@ -10,3 +10,13 @@
 @media(max-width:850px){.poem-shelf{grid-template-columns:1fr}.poem-card{min-height:370px}.reading-sample{position:relative;right:auto;top:auto;width:min(80vw,430px);margin:3rem 0 0 auto;transform:rotate(2deg)}.poetry-orbit{opacity:.45;width:70vw}.poetry-header{position:relative;align-items:flex-start}.poetry-header nav{flex-wrap:wrap;justify-content:flex-end}}
 @media(max-width:520px){.poetry-header{display:block}.poetry-header nav{justify-content:flex-start;margin-top:1rem;gap:.8rem 1rem}.poetry-header .back{width:100%;padding:0;border:0}.poetry-hero{padding-inline:1.5rem}.poetry-hero h1{font-size:clamp(4.3rem,18vw,6rem)}.enter{left:1.5rem}.archive,.reading-room,.poetry-close{padding-inline:1.5rem}footer{flex-direction:column;gap:.7rem}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.poetry-orbit{animation:none}[data-poetry-reveal]{opacity:1;transform:none;transition:none}}
+body.is-ready .poetry-hero>div:first-child{animation:poetryHeroIn .9s cubic-bezier(.2,.7,.2,1) both}
+body.is-ready .poetry-orbit{animation:orbitSpin 26s linear infinite,poetryOrbitIn 1s .12s cubic-bezier(.2,.7,.2,1) both}
+body.is-ready .enter{animation:poetryEnterIn .7s .45s ease both}
+.poem-card::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 28%,rgb(255 255 255 / 9%) 48%,transparent 68%);transform:translateX(-120%);transition:transform .6s ease}.poem-card:hover::after,.poem-card:focus-visible::after{transform:translateX(120%)}
+.reading-sample{transition:transform .35s ease,box-shadow .35s ease}.reading-room:hover .reading-sample{transform:translateY(-50%) rotate(-1deg);box-shadow:22px 24px 0 rgb(0 0 0 / 20%)}
+@keyframes poetryHeroIn{from{opacity:0;transform:translate3d(-26px,34px,0)}to{opacity:1;transform:none}}
+@keyframes poetryOrbitIn{from{opacity:0;scale:.88}to{opacity:1;scale:1}}
+@keyframes poetryEnterIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@media(max-width:850px){.reading-room:hover .reading-sample{transform:rotate(-1deg)}}
+@media(prefers-reduced-motion:reduce){body.is-ready .poetry-hero>div:first-child,body.is-ready .poetry-orbit,body.is-ready .enter{animation:none}.poem-card::after{display:none}}
