@@ -27,8 +27,19 @@
     if (image.complete && image.naturalWidth === 0) markImageMissing();
   }
 
+  const replay = document.querySelector("[data-ink-replay]");
+
+  const playInk = () => {
+    if (!stage || reduced) return;
+    stage.classList.remove("ink-enter");
+    void stage.offsetWidth;
+    stage.classList.add("ink-enter");
+  };
+
   if (stage && !reduced) {
     stage.classList.add("is-revealed");
-    requestAnimationFrame(() => stage.classList.add("ink-enter"));
+    requestAnimationFrame(playInk);
   }
+
+  replay?.addEventListener("click", playInk);
 })();
