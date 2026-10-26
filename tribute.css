@@ -1495,3 +1495,46 @@ main{
   .tribute-script[data-handwrite]{font-size:clamp(1.7rem,9vw,2.35rem)!important}
   .tribute-whisper[data-handwrite]{font-size:clamp(1.45rem,7.4vw,2rem)!important}
 }
+
+
+/* Closing typography refinement */
+.tribute-close > p:first-child,
+.tribute-close a,
+footer{
+  font-family:var(--sans)!important;
+  letter-spacing:.055em!important;
+}
+.tribute-close > p:first-child{
+  font-size:.68rem!important;
+  color:#8f958b!important;
+}
+.tribute-close h2{
+  max-width:1040px;
+  font-size:clamp(3.9rem,7.2vw,7.4rem)!important;
+  line-height:.94!important;
+  letter-spacing:-.045em!important;
+  margin-top:1.25rem!important;
+}
+.tribute-close h2 em{
+  line-height:1!important;
+}
+.tribute-close{
+  gap:.35rem;
+}
+footer{
+  font-size:.72rem!important;
+  color:#7d8379!important;
+}
+footer a{
+  letter-spacing:.04em!important;
+}
+@media(max-width:520px){
+  .tribute-close h2{
+    font-size:clamp(3.15rem,13.8vw,4.45rem)!important;
+    line-height:.97!important;
+    max-width:92vw;
+  }
+  .tribute-close > p:first-child{
+    font-size:.64rem!important;
+  }
+}
