@@ -399,3 +399,68 @@ body.reader-open{overflow:hidden}
   transition:none!important;
   will-change:opacity,filter,transform;
 }
+
+
+/* Motion refinement: book morph + physical peel */
+.reader.is-entering .reader-shell{
+  opacity:.02;
+}
+.reader-shell{
+  transition:opacity .18s ease;
+}
+.book-morph-clone{
+  position:fixed!important;
+  z-index:1200!important;
+  margin:0!important;
+  pointer-events:none!important;
+  transform-origin:top left!important;
+  box-shadow:0 30px 80px rgb(0 0 0 / 38%)!important;
+}
+.reader-page--under{
+  transition:transform .18s linear,filter .18s linear;
+}
+.reader-page--top{
+  box-shadow:
+    calc(-28px * var(--peel-shadow,0))
+    calc(18px * var(--peel-shadow,0))
+    calc(50px * var(--peel-shadow,0))
+    rgb(0 0 0 / calc(.24 * var(--peel-shadow,0))),
+    0 30px 80px rgb(0 0 0 / 42%);
+}
+.page-fold{
+  width:104px;
+  height:104px;
+  padding:.8rem .65rem;
+  background:
+    linear-gradient(225deg,
+      #bbb4a9 0 38%,
+      #f4ede1 39% 58%,
+      #d0c7b9 59% 100%);
+  box-shadow:-10px 12px 24px rgb(0 0 0 / 18%);
+}
+.page-fold span{
+  opacity:.62;
+  transition:opacity .2s ease;
+}
+.page-fold:hover span,.page-fold:focus-visible span,.page-fold:active span{
+  opacity:.92;
+}
+.page-curl{
+  background:
+    linear-gradient(225deg,
+      rgb(113 107 99 / 5%) 0 27%,
+      #f7f0e4 28% 47%,
+      #d4cabd 48% 67%,
+      rgb(90 84 78 / 22%) 68% 100%);
+  box-shadow:-18px 24px 34px rgb(0 0 0 / 24%);
+  filter:drop-shadow(-10px 12px 16px rgb(0 0 0 / 18%));
+}
+.handwrite-char{
+  text-shadow:0 0 5px rgb(167 177 138 / 8%);
+}
+[data-scroll-note]{
+  transition:opacity .12s linear,transform .12s linear;
+}
+@media(max-width:520px){
+  .page-fold{width:92px;height:92px}
+}
