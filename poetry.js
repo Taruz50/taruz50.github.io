@@ -3,6 +3,7 @@
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   const handwritingTargets = [...document.querySelectorAll("[data-handwrite]")];
+
   const prepareHandwriting = (el) => {
     if (el.dataset.handwriteReady) return;
     const text = el.textContent ?? "";
@@ -16,19 +17,42 @@
     });
     el.dataset.handwriteReady = "true";
   };
-  handwritingTargets.forEach(prepareHandwriting);
 
   const setHandProgress = (el, progress) => {
     const chars = [...el.querySelectorAll(".handwrite-char")];
     const total = Math.max(chars.length, 1);
     chars.forEach((char,index) => {
       const start = index / total;
-      const end = Math.min(1, start + 0.18);
+      const end = Math.min(1, start + 0.22);
       const local = Math.max(0, Math.min(1, (progress - start) / Math.max(.001, end - start)));
-      char.style.opacity = local.toFixed(3);
-      char.style.filter = `blur(${(2.2 * (1-local)).toFixed(2)}px)`;
-      char.style.transform = `translateY(${(5 * (1-local)).toFixed(2)}px)`;
+      const eased = local * local * (3 - 2 * local);
+      char.style.opacity = eased.toFixed(3);
+      char.style.filter = `blur(${(1.8 * (1-eased)).toFixed(2)}px)`;
+      char.style.transform = `translateY(${(3.5 * (1-eased)).toFixed(2)}px)`;
     });
+  };
+
+  handwritingTargets.forEach(prepareHandwriting);
+
+  const progressForElement = (el, vh) => {
+    const r = el.getBoundingClientRect();
+    const center = r.top + r.height / 2;
+    const writeStart = vh * .78;
+    const fullStart = vh * .58;
+    const fullEnd = vh * .34;
+    const eraseEnd = vh * .12;
+
+    if (center >= writeStart) return 0;
+    if (center <= eraseEnd) return 0;
+    if (center <= fullStart && center >= fullEnd) return 1;
+
+    if (center < writeStart && center > fullStart) {
+      const t = (writeStart - center) / (writeStart - fullStart);
+      return Math.max(0, Math.min(1, t));
+    }
+
+    const t = (center - eraseEnd) / (fullEnd - eraseEnd);
+    return Math.max(0, Math.min(1, t));
   };
 
   const updateScrollWriting = () => {
@@ -36,18 +60,15 @@
     const vh = window.innerHeight || 1;
 
     document.querySelectorAll("[data-scroll-note]").forEach((section) => {
-      const rect = section.getBoundingClientRect();
-      const enter = 1 - Math.min(1, Math.max(0, (rect.top - vh * .18) / (vh * .72)));
-      const leave = Math.min(1, Math.max(0, (rect.bottom - vh * .08) / (vh * .58)));
-      const strength = Math.max(.10, Math.min(1, Math.min(enter, leave) * 1.08));
+      const r = section.getBoundingClientRect();
+      const center = r.top + r.height/2;
+      const distance = Math.abs(center - vh*.5);
+      const strength = Math.max(.28, Math.min(1, 1 - distance/(vh*.78)));
       section.style.setProperty("--scroll-opacity", strength.toFixed(3));
+    });
 
-      section.querySelectorAll("[data-handwrite]").forEach((el) => {
-        const er = el.getBoundingClientRect();
-        const p = 1 - Math.min(1, Math.max(0, (er.top - vh * .26) / (vh * .52)));
-        const reverse = Math.min(1, Math.max(0, (er.bottom - vh * .08) / (vh * .42)));
-        setHandProgress(el, Math.max(0, Math.min(1, p * reverse)));
-      });
+    handwritingTargets.forEach((el) => {
+      setHandProgress(el, progressForElement(el, vh));
     });
   };
 
@@ -73,6 +94,7 @@
   const fold=document.querySelector("[data-page-fold]");
   const curl=document.querySelector("[data-page-curl]");
   const close=document.querySelector("[data-reader-close]");
+  const shell=document.querySelector(".reader-shell");
   const topFields={
     number:document.querySelector("[data-reader-number]"),
     kicker:document.querySelector("[data-reader-kicker]"),
@@ -85,7 +107,8 @@
     title:document.querySelector("[data-under-title]"),
     copy:document.querySelector("[data-under-copy]")
   };
-  let pageIndex=0, dragging=false, startX=0, startY=0, peel=0;
+
+  let pageIndex=0, dragging=false, peel=0, pointerId=null;
 
   const fill=(fields,data)=>{
     fields.number.textContent=data.number;
@@ -93,97 +116,126 @@
     fields.title.textContent=data.title;
     fields.copy.textContent=data.copy;
   };
-  const render=()=>{
-    fill(topFields,pages[pageIndex]);
-    fill(underFields,pages[(pageIndex+1)%pages.length]);
+
+  const resetVisuals=()=>{
     peel=0;
     page.style.clipPath="";
     page.style.transform="";
     page.style.opacity="1";
+    page.style.setProperty("--peel-shadow","0");
     curl.style.opacity="0";
     curl.style.width="0px";
     curl.style.height="0px";
+    curl.style.transform="";
   };
-  const openReader=(index)=>{
-    pageIndex=index;render();
-    reader.classList.add("is-open");
+
+  const render=()=>{
+    fill(topFields,pages[pageIndex]);
+    fill(underFields,pages[(pageIndex+1)%pages.length]);
+    resetVisuals();
+  };
+
+  const morphBookToReader=(book,index)=>{
+    pageIndex=index;
+    render();
+    const start=book.getBoundingClientRect();
+    reader.classList.add("is-open","is-entering");
     reader.setAttribute("aria-hidden","false");
     document.body.classList.add("reader-open");
+    requestAnimationFrame(()=>{
+      const end=page.getBoundingClientRect();
+      const clone=book.cloneNode(true);
+      clone.classList.add("book-morph-clone");
+      Object.assign(clone.style,{
+        left:`${start.left}px`,top:`${start.top}px`,width:`${start.width}px`,height:`${start.height}px`
+      });
+      document.body.appendChild(clone);
+      const dx=end.left-start.left,dy=end.top-start.top;
+      const sx=end.width/start.width,sy=end.height/start.height;
+      const anim=clone.animate([
+        {transform:"translate(0,0) scale(1)",borderRadius:"2px 10px 10px 2px",opacity:1},
+        {transform:`translate(${dx}px,${dy}px) scale(${sx},${sy})`,borderRadius:"2px",opacity:.96}
+      ],{duration:520,easing:"cubic-bezier(.18,.72,.2,1)",fill:"forwards"});
+      anim.onfinish=()=>{
+        clone.remove();
+        reader.classList.remove("is-entering");
+      };
+    });
   };
+
   const closeReader=()=>{
-    reader.classList.remove("is-open");
+    reader.classList.remove("is-open","is-entering");
     reader.setAttribute("aria-hidden","true");
     document.body.classList.remove("reader-open");
   };
-  document.querySelectorAll("[data-book]").forEach(book=>book.addEventListener("click",()=>openReader(Number(book.dataset.book||0))));
+
+  document.querySelectorAll("[data-book]").forEach(book=>book.addEventListener("click",()=>morphBookToReader(book,Number(book.dataset.book||0))));
   close?.addEventListener("click",closeReader);
   reader?.addEventListener("click",e=>{if(e.target===reader) closeReader();});
 
   const applyPeel=(clientX,clientY)=>{
     const r=page.getBoundingClientRect();
-    const dx=Math.max(0,r.right-clientX);
-    const dy=Math.max(0,clientY-r.top);
-    peel=Math.min(Math.max(dx,dy*.72),Math.min(r.width*.58,420));
-    const pct=Math.min(92,(peel/r.width)*100);
-    page.style.clipPath=`polygon(0 0, calc(100% - ${pct}%) 0, 100% ${Math.min(100,pct*1.05)}%, 100% 100%, 0 100%)`;
-    curl.style.opacity=Math.min(1,peel/80).toFixed(3);
-    curl.style.width=`${Math.max(24,peel)}px`;
-    curl.style.height=`${Math.max(24,peel*1.08)}px`;
-    curl.style.transform=`rotate(${Math.min(18,peel*.04)}deg)`;
-    return peel;
+    const localX=Math.max(0,Math.min(r.width,r.right-clientX));
+    const localY=Math.max(0,Math.min(r.height,clientY-r.top));
+    peel=Math.min(Math.max(localX,localY*.82),Math.min(r.width*.62,460));
+
+    const px=Math.max(30,peel);
+    const pct=Math.min(96,(peel/r.width)*100);
+    const foldY=Math.min(100,Math.max(8,(localY/r.height)*100));
+    page.style.clipPath=`polygon(0 0, calc(100% - ${pct}%) 0, 100% ${foldY}%, 100% 100%, 0 100%)`;
+    page.style.setProperty("--peel-shadow",Math.min(1,peel/180).toFixed(3));
+
+    curl.style.opacity=Math.min(1,peel/55).toFixed(3);
+    curl.style.width=`${px}px`;
+    curl.style.height=`${Math.max(34,px*.92)}px`;
+    curl.style.transform=`translate(${Math.min(0,-localX*.08)}px,${Math.max(0,localY*.05)}px) rotate(${Math.min(28,peel*.055)}deg)`;
+
+    under.style.transform=`translateY(${Math.max(0,8-peel*.018)}px) scale(${(.992+Math.min(.008,peel/60000)).toFixed(4)})`;
+    under.style.filter=`brightness(${(.97+Math.min(.03,peel/6000)).toFixed(3)})`;
   };
 
-  const completeTurn=()=>{
-    const r=page.getBoundingClientRect();
-    const currentClip=getComputedStyle(page).clipPath;
-    const anim=page.animate([
-      {clipPath:currentClip,opacity:1},
-      {clipPath:"polygon(0 0, 0 0, 0 100%, 0 100%)",opacity:.92}
-    ],{
-      duration:520,
-      easing:"cubic-bezier(.2,.72,.18,1)",
-      fill:"forwards"
-    });
-    curl.animate([
-      {opacity:1,transform:curl.style.transform||"rotate(0deg)"},
-      {opacity:.15,transform:"translate(-18vw,18vh) rotate(28deg)"}
-    ],{duration:500,easing:"ease-out",fill:"forwards"});
-    anim.onfinish=()=>{
-      pageIndex=(pageIndex+1)%pages.length;
-      render();
-    };
-  };
-
-  const resetPeel=()=>{
+  const animatePeelTo=(target,duration,onDone)=>{
     const start=peel;
-    const a={value:start};
-    const duration=260,startTime=performance.now();
+    const startTime=performance.now();
     const tick=(now)=>{
       const t=Math.min(1,(now-startTime)/duration);
       const eased=1-Math.pow(1-t,3);
-      const v=start*(1-eased);
+      const value=start+(target-start)*eased;
       const r=page.getBoundingClientRect();
-      const pct=Math.min(92,(v/r.width)*100);
-      page.style.clipPath=v<1?"":`polygon(0 0, calc(100% - ${pct}%) 0, 100% ${Math.min(100,pct*1.05)}%, 100% 100%, 0 100%)`;
-      curl.style.width=`${Math.max(0,v)}px`;
-      curl.style.height=`${Math.max(0,v*1.08)}px`;
-      curl.style.opacity=(v/Math.max(80,start)).toFixed(3);
+      const x=r.right-value;
+      const y=r.top+Math.min(r.height*.72,value*.72);
+      applyPeel(x,y);
       if(t<1) requestAnimationFrame(tick);
-      else render();
+      else onDone?.();
     };
     requestAnimationFrame(tick);
   };
 
+  const completeTurn=()=>{
+    const max=Math.min(page.getBoundingClientRect().width*.96,760);
+    animatePeelTo(max,420,()=>{
+      const fade=page.animate([{opacity:1},{opacity:.02}],{duration:160,easing:"ease-out",fill:"forwards"});
+      fade.onfinish=()=>{
+        pageIndex=(pageIndex+1)%pages.length;
+        render();
+        page.animate([{opacity:.7},{opacity:1}],{duration:220,easing:"ease-out"});
+      };
+    });
+  };
+
+  const resetPeel=()=>animatePeelTo(0,260,resetVisuals);
+
   fold?.addEventListener("pointerdown",e=>{
-    dragging=true;startX=e.clientX;startY=e.clientY;
+    dragging=true;
+    pointerId=e.pointerId;
     fold.setPointerCapture(e.pointerId);
+    applyPeel(e.clientX,e.clientY);
   });
-  fold?.addEventListener("pointermove",e=>{if(dragging) applyPeel(e.clientX,e.clientY);});
+  fold?.addEventListener("pointermove",e=>{if(dragging&&e.pointerId===pointerId) applyPeel(e.clientX,e.clientY);});
   const finish=e=>{
     if(!dragging) return;
     dragging=false;
-    const moved=Math.hypot(e.clientX-startX,e.clientY-startY);
-    if(peel>150||moved>150) completeTurn();
+    if(peel>Math.min(180,page.getBoundingClientRect().width*.28)) completeTurn();
     else resetPeel();
   };
   fold?.addEventListener("pointerup",finish);
@@ -191,7 +243,7 @@
   fold?.addEventListener("keydown",e=>{
     if(e.key!=="Enter"&&e.key!==" ") return;
     e.preventDefault();
-    peel=180;
+    peel=Math.min(220,page.getBoundingClientRect().width*.35);
     completeTurn();
   });
 
