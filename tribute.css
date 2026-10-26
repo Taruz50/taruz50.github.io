@@ -872,3 +872,166 @@ main{
     mask-image:none!important;
   }
 }
+
+
+/* Full-section ink field — portrait never resolves to a rectangular photo */
+.tribute-hero{
+  isolation:isolate;
+  overflow:hidden;
+}
+.tribute-copy{
+  position:relative;
+  z-index:4;
+  max-width:min(54vw,780px);
+}
+.paint-stage{
+  position:absolute!important;
+  inset:0!important;
+  z-index:1;
+  width:100%!important;
+  height:100%!important;
+  max-width:none!important;
+  aspect-ratio:auto!important;
+  margin:0!important;
+  pointer-events:none;
+}
+.paint-photo{
+  position:absolute!important;
+  inset:0!important;
+  width:100%;
+  height:100%;
+  overflow:visible!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  clip-path:none!important;
+  opacity:1!important;
+  transform:none!important;
+  -webkit-mask-image:
+    radial-gradient(ellipse at center,#000 0 52%,rgba(0,0,0,.9) 64%,transparent 78%),
+    radial-gradient(ellipse at center,#000 0 48%,rgba(0,0,0,.78) 63%,transparent 80%),
+    radial-gradient(ellipse at center,#000 0 44%,rgba(0,0,0,.72) 60%,transparent 82%),
+    radial-gradient(ellipse at center,#000 0 38%,rgba(0,0,0,.65) 58%,transparent 84%);
+  mask-image:
+    radial-gradient(ellipse at center,#000 0 52%,rgba(0,0,0,.9) 64%,transparent 78%),
+    radial-gradient(ellipse at center,#000 0 48%,rgba(0,0,0,.78) 63%,transparent 80%),
+    radial-gradient(ellipse at center,#000 0 44%,rgba(0,0,0,.72) 60%,transparent 82%),
+    radial-gradient(ellipse at center,#000 0 38%,rgba(0,0,0,.65) 58%,transparent 84%);
+  -webkit-mask-repeat:no-repeat;
+  mask-repeat:no-repeat;
+  -webkit-mask-position:78% 42%,66% 56%,89% 63%,73% 79%;
+  mask-position:78% 42%,66% 56%,89% 63%,73% 79%;
+  -webkit-mask-size:130% 165%,82% 112%,72% 96%,58% 78%;
+  mask-size:130% 165%,82% 112%,72% 96%,58% 78%;
+}
+.paint-image{
+  position:absolute;
+  top:-6%;
+  right:-2%;
+  width:min(64vw,930px)!important;
+  height:112%!important;
+  object-fit:cover!important;
+  object-position:50% 36%!important;
+  filter:grayscale(1) contrast(1.12) brightness(.74)!important;
+  transform:scale(1.04)!important;
+  -webkit-mask-image:
+    linear-gradient(90deg,transparent 0%,rgba(0,0,0,.18) 8%,#000 27%,#000 78%,rgba(0,0,0,.72) 90%,transparent 100%),
+    linear-gradient(180deg,transparent 0%,#000 10%,#000 87%,transparent 100%);
+  mask-image:
+    linear-gradient(90deg,transparent 0%,rgba(0,0,0,.18) 8%,#000 27%,#000 78%,rgba(0,0,0,.72) 90%,transparent 100%),
+    linear-gradient(180deg,transparent 0%,#000 10%,#000 87%,transparent 100%);
+  -webkit-mask-composite:source-in;
+  mask-composite:intersect;
+}
+.paint-stage::before{
+  content:"";
+  position:absolute;
+  inset:-10%;
+  z-index:0;
+  background:
+    radial-gradient(circle at 72% 42%,rgb(12 13 12 / 88%) 0 10%,transparent 34%),
+    radial-gradient(circle at 84% 57%,rgb(103 112 79 / 12%) 0 8%,transparent 30%),
+    radial-gradient(circle at 64% 68%,rgb(235 230 220 / 5%) 0 6%,transparent 26%);
+  opacity:.9;
+  pointer-events:none;
+}
+.paint-stage.ink-enter .paint-photo{
+  animation:fullSectionInkBloom 1.7s cubic-bezier(.16,.76,.18,1) both;
+}
+@keyframes fullSectionInkBloom{
+  0%{
+    -webkit-mask-size:0% 0%,0% 0%,0% 0%,0% 0%;
+    mask-size:0% 0%,0% 0%,0% 0%,0% 0%;
+  }
+  30%{
+    -webkit-mask-size:38% 48%,16% 20%,10% 14%,0% 0%;
+    mask-size:38% 48%,16% 20%,10% 14%,0% 0%;
+  }
+  62%{
+    -webkit-mask-size:88% 112%,48% 64%,36% 48%,24% 32%;
+    mask-size:88% 112%,48% 64%,36% 48%,24% 32%;
+  }
+  100%{
+    -webkit-mask-size:130% 165%,82% 112%,72% 96%,58% 78%;
+    mask-size:130% 165%,82% 112%,72% 96%,58% 78%;
+  }
+}
+.paint-stage:not(.ink-enter) .paint-photo{
+  -webkit-mask-size:130% 165%,82% 112%,72% 96%,58% 78%;
+  mask-size:130% 165%,82% 112%,72% 96%,58% 78%;
+}
+.ink-replay{
+  position:absolute!important;
+  right:6vw!important;
+  bottom:3rem!important;
+  z-index:6!important;
+  pointer-events:auto;
+}
+.paint-placeholder{display:none!important}
+.ink-drop,
+.paint-stage::after,
+.paint-stage.ink-enter::before{display:none!important}
+
+@media(max-width:980px){
+  .tribute-copy{
+    max-width:100%;
+    width:min(92vw,760px);
+  }
+  .paint-stage{
+    position:relative!important;
+    inset:auto!important;
+    height:min(72svh,760px)!important;
+    margin-top:1rem!important;
+  }
+  .paint-image{
+    top:0;
+    right:50%;
+    width:min(92vw,680px)!important;
+    height:100%!important;
+    transform:translateX(50%) scale(1.02)!important;
+    object-position:50% 34%!important;
+  }
+  .paint-photo{
+    -webkit-mask-position:50% 40%,34% 57%,68% 60%,50% 78%;
+    mask-position:50% 40%,34% 57%,68% 60%,50% 78%;
+    -webkit-mask-size:138% 168%,84% 108%,72% 92%,58% 72%;
+    mask-size:138% 168%,84% 108%,72% 92%,58% 72%;
+  }
+  .paint-stage.ink-enter .paint-photo{
+    animation-name:fullSectionInkBloomMobile;
+  }
+  @keyframes fullSectionInkBloomMobile{
+    0%{-webkit-mask-size:0% 0%,0% 0%,0% 0%,0% 0%;mask-size:0% 0%,0% 0%,0% 0%,0% 0%}
+    45%{-webkit-mask-size:64% 78%,28% 38%,20% 28%,12% 18%;mask-size:64% 78%,28% 38%,20% 28%,12% 18%}
+    100%{-webkit-mask-size:138% 168%,84% 108%,72% 92%,58% 72%;mask-size:138% 168%,84% 108%,72% 92%,58% 72%}
+  }
+  .ink-replay{
+    right:5vw!important;
+    bottom:.6rem!important;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  .paint-photo{
+    -webkit-mask-size:130% 165%,82% 112%,72% 96%,58% 78%!important;
+    mask-size:130% 165%,82% 112%,72% 96%,58% 78%!important;
+  }
+}
