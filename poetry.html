@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#07120b" />
+  <meta name="theme-color" content="#0f100f" />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png" />
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" sizes="180x180" />
@@ -13,88 +13,88 @@
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
   <link rel="stylesheet" href="poetry.css" />
   <link rel="stylesheet" href="personal-shell.css" />
-  <title>Andrew — Poetry</title>
+  <title>Taruz — Poetry</title>
 </head>
 <body>
   <header class="personal-site-header" data-personal-header>
     <nav class="personal-site-nav" aria-label="Personal navigation">
       <div class="personal-nav-header">
-        <a class="personal-shell-brand" href="andrew.html" aria-label="Andrew personal home"><img src="assets/Taruz.png" alt="Taruz" /></a>
+        <a class="personal-shell-brand" href="home.html" aria-label="Taruz creative home"><img src="assets/Taruz.png" alt="Taruz" /></a>
         <button class="personal-menu-btn" type="button" aria-label="Open navigation" aria-expanded="false" data-personal-menu-btn><i class="ri-menu-line" aria-hidden="true"></i></button>
       </div>
-      <ul class="personal-shell-links" data-personal-nav-links>
-        <li><a href="andrew.html#story">Story</a></li>
-        <li><a aria-current="page" href="poetry.html">Poetry</a></li>
-        <li><a href="tribute.html">Tribute</a></li>
-        <li><a class="quiet-link" href="home.html">Taruz Creative ↗</a></li>
-      </ul>
+      <ul class="personal-shell-links" data-personal-nav-links></ul>
     </nav>
   </header>
 
   <main>
     <section class="poetry-hero">
-      <div>
+      <div class="poetry-hero-copy" data-scroll-note>
         <p class="eyebrow">POETRY / FRAGMENTS / NOTES</p>
         <h1>Some things<br />only make sense<br /><em data-handwrite>when written.</em></h1>
-        <p class="intro">A quiet archive for poems, fragments and thoughts that do not belong inside a portfolio caption.</p>
+        <p class="intro">A quieter room for writing that does not need to explain itself.</p>
       </div>
       <div class="poetry-orbit" aria-hidden="true">
         <span>WORDS</span><span>MEMORY</span><span>FAITH</span><span>WEIGHT</span>
       </div>
-      <a class="enter" href="#archive">ENTER THE ARCHIVE <span>↓</span></a>
+      <a class="enter" href="#archive">OPEN THE BOOKS <span>↓</span></a>
     </section>
 
     <section class="archive" id="archive" aria-labelledby="archive-title">
-      <div class="archive-head" data-poetry-reveal>
-        <p>ARCHIVE / OPENING</p>
+      <div class="archive-head" data-scroll-note>
+        <p>THE SMALL LIBRARY</p>
         <h2 id="archive-title">Not everything<br /><em data-handwrite>needs explaining.</em></h2>
+        <p class="archive-note">Each volume holds one piece. Open one when it deserves your attention.</p>
       </div>
 
-      <div class="poem-shelf">
-        <article class="poem-card poem-card--available" data-poetry-reveal tabindex="0">
-          <span class="poem-no">01</span>
-          <p class="poem-state">FIRST ENTRY</p>
-          <h3>The archive begins here.</h3>
-          <p class="poem-copy">Your first selected poem will live here exactly as written — with space, rhythm and no unnecessary decoration around it.</p>
-          <button type="button" data-open-reader disabled>POEM TO BE ADDED</button>
-        </article>
-
-        <article class="poem-card" data-poetry-reveal tabindex="0">
-          <span class="poem-no">02</span>
-          <p class="poem-state">FRAGMENT</p>
-          <h3>Short pieces can breathe too.</h3>
-          <p class="poem-copy">Fragments, unfinished thoughts and smaller pieces can sit beside longer poems without pretending to be complete.</p>
-          <span class="poem-tag">COMING SOON</span>
-        </article>
-
-        <article class="poem-card poem-card--dark" data-poetry-reveal tabindex="0">
-          <span class="poem-no">03</span>
-          <p class="poem-state">PRIVATE LANGUAGE</p>
-          <h3>Some writing stays difficult on purpose.</h3>
-          <p class="poem-copy">The archive will preserve ambiguity instead of translating every line into something easier to consume.</p>
-          <span class="poem-tag">COMING SOON</span>
-        </article>
+      <div class="book-shelf" aria-label="Poetry archive">
+        <button class="book book--1" type="button" data-book="0">
+          <span class="book-number">01</span>
+          <span class="book-title">FIRST ENTRY</span>
+          <span class="book-subtitle">A page waiting for its poem.</span>
+        </button>
+        <button class="book book--2" type="button" data-book="1">
+          <span class="book-number">02</span>
+          <span class="book-title">FRAGMENT</span>
+          <span class="book-subtitle">For the unfinished things.</span>
+        </button>
+        <button class="book book--3" type="button" data-book="2">
+          <span class="book-number">03</span>
+          <span class="book-title">PRIVATE LANGUAGE</span>
+          <span class="book-subtitle">Some writing stays difficult on purpose.</span>
+        </button>
       </div>
     </section>
 
-    <section class="reading-room" data-poetry-reveal>
+    <section class="reading-intro" data-scroll-note>
       <p>READING MODE</p>
-      <h2>One poem.<br /><em>One page.</em><br />Nothing else.</h2>
-      <div class="reading-sample" aria-hidden="true">
-        <span class="line line--1"></span>
-        <span class="line line--2"></span>
-        <span class="line line--3"></span>
-        <span class="line line--4"></span>
-      </div>
-      <p class="reading-note">When the poems are added, opening one will quiet the interface and let the writing take over the screen.</p>
+      <h2>One piece.<br /><em data-handwrite>One page.</em><br />Nothing else.</h2>
+      <p>Open a volume above. The corner of the page can be dragged like a physical sheet to move forward.</p>
     </section>
 
-    <section class="poetry-close">
+    <section class="poetry-close" data-scroll-note>
       <p>THE ARCHIVE IS DELIBERATELY SMALL.</p>
       <h2>Only what deserves<br /><em data-handwrite>to stay.</em></h2>
-      <a href="andrew.html">Back to Andrew <span>↗</span></a>
+      <a href="andrew.html">Back to About <span>↗</span></a>
     </section>
   </main>
+
+  <div class="reader" data-reader aria-hidden="true">
+    <button class="reader-close" type="button" data-reader-close aria-label="Close reading mode"><i class="ri-close-line" aria-hidden="true"></i></button>
+    <div class="reader-shell">
+      <article class="reader-page" data-reader-page>
+        <div class="reader-meta"><span data-reader-number>01</span><span>POETRY ARCHIVE</span></div>
+        <div class="reader-copy">
+          <p class="reader-kicker" data-reader-kicker>FIRST ENTRY</p>
+          <h2 data-reader-title>A page waiting for its poem.</h2>
+          <p class="reader-placeholder" data-reader-copy>The writing itself has not been added yet. This page is here to establish the reading experience without inventing words that are not yours.</p>
+        </div>
+        <div class="page-fold" data-page-fold aria-label="Drag to turn page" role="button" tabindex="0">
+          <span>TURN</span>
+        </div>
+      </article>
+      <p class="reader-hint">Drag the folded corner ←</p>
+    </div>
+  </div>
 
   <footer><span>© 2026 ANDREW TARUVINGA</span><a href="privacy.html">Privacy</a></footer>
   <script src="poetry.js"></script>
