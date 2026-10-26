@@ -1215,3 +1215,18 @@ main{
     height:62svh!important;
   }
 }
+
+
+/* Safari-safe reveal fallback: JS animates clip-path directly */
+.paint-photo{
+  clip-path:polygon(-8% -8%,108% -6%,110% 108%,-10% 110%)!important;
+  -webkit-clip-path:polygon(-8% -8%,108% -6%,110% 108%,-10% 110%)!important;
+  -webkit-mask-image:none!important;
+  mask-image:none!important;
+}
+.paint-stage.ink-enter .paint-photo,
+.paint-stage:not(.ink-enter) .paint-photo{
+  animation:none!important;
+  -webkit-mask-size:auto!important;
+  mask-size:auto!important;
+}
