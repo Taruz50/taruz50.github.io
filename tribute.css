@@ -1455,3 +1455,22 @@ main{
     transition:none!important;
   }
 }
+
+
+/* Scroll-linked letter behaviour */
+[data-tribute-reveal]{
+  opacity:var(--tribute-scroll-opacity,1);
+  transition:opacity .14s linear;
+}
+[data-tribute-reveal].is-visible{
+  opacity:var(--tribute-scroll-opacity,1);
+}
+.handwrite-char{
+  transition:
+    opacity .24s linear,
+    filter .34s ease,
+    transform .34s ease!important;
+}
+@media(prefers-reduced-motion:reduce){
+  [data-tribute-reveal]{opacity:1!important}
+}
