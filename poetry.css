@@ -464,3 +464,25 @@ body.reader-open{overflow:hidden}
 @media(max-width:520px){
   .page-fold{width:92px;height:92px}
 }
+
+
+/* Handwriting scale refinement */
+.poetry-hero h1 em[data-handwrite]{
+  font-size:.82em;
+  letter-spacing:-.01em;
+}
+.archive-head h2 em[data-handwrite],
+.reading-intro h2 em[data-handwrite],
+.poetry-close h2 em[data-handwrite]{
+  font-size:.78em;
+  letter-spacing:-.008em;
+}
+.handwrite-char{
+  margin-right:-.015em;
+}
+@media(max-width:520px){
+  .poetry-hero h1 em[data-handwrite]{font-size:.76em}
+  .archive-head h2 em[data-handwrite],
+  .reading-intro h2 em[data-handwrite],
+  .poetry-close h2 em[data-handwrite]{font-size:.72em}
+}
