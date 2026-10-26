@@ -1474,3 +1474,24 @@ main{
 @media(prefers-reduced-motion:reduce){
   [data-tribute-reveal]{opacity:1!important}
 }
+
+
+/* Handwriting scale refinement */
+.tribute-script[data-handwrite]{
+  font-size:clamp(2.1rem,3vw,3.15rem)!important;
+  line-height:.94!important;
+}
+.tribute-whisper[data-handwrite]{
+  font-size:clamp(1.65rem,2.6vw,2.65rem)!important;
+  line-height:1!important;
+}
+.tribute-script--closing[data-handwrite]{
+  font-size:clamp(2rem,3vw,3.1rem)!important;
+}
+.handwrite-char{
+  margin-right:-.015em;
+}
+@media(max-width:520px){
+  .tribute-script[data-handwrite]{font-size:clamp(1.7rem,9vw,2.35rem)!important}
+  .tribute-whisper[data-handwrite]{font-size:clamp(1.45rem,7.4vw,2rem)!important}
+}
