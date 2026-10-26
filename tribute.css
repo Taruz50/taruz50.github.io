@@ -792,3 +792,83 @@ main{
 @media(prefers-reduced-motion:reduce){
   .ink-replay{display:none}
 }
+
+
+/* Corrected ink reveal: reveal the image itself rather than covering it */
+.paint-stage{
+  isolation:isolate;
+}
+.paint-photo{
+  clip-path:none!important;
+  -webkit-mask-image:none!important;
+  mask-image:none!important;
+  opacity:1!important;
+  transform:none!important;
+}
+.paint-image{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:50% 38%;
+  filter:grayscale(1) contrast(1.08) brightness(.82);
+  -webkit-mask-image:radial-gradient(circle at 52% 40%,#000 0 1%,transparent 1.6%);
+  mask-image:radial-gradient(circle at 52% 40%,#000 0 1%,transparent 1.6%);
+  -webkit-mask-repeat:no-repeat;
+  mask-repeat:no-repeat;
+  transition:none;
+}
+.paint-stage.ink-enter .paint-image{
+  animation:inkMaskBloom 1.65s cubic-bezier(.16,.76,.2,1) forwards;
+}
+@keyframes inkMaskBloom{
+  0%{
+    -webkit-mask-image:
+      radial-gradient(circle at 52% 40%,#000 0 2%,transparent 3%),
+      radial-gradient(circle at 45% 46%,#000 0 0%,transparent 0%);
+    mask-image:
+      radial-gradient(circle at 52% 40%,#000 0 2%,transparent 3%),
+      radial-gradient(circle at 45% 46%,#000 0 0%,transparent 0%);
+  }
+  34%{
+    -webkit-mask-image:
+      radial-gradient(circle at 52% 40%,#000 0 18%,transparent 25%),
+      radial-gradient(circle at 39% 47%,#000 0 8%,transparent 13%),
+      radial-gradient(circle at 65% 50%,#000 0 7%,transparent 12%);
+    mask-image:
+      radial-gradient(circle at 52% 40%,#000 0 18%,transparent 25%),
+      radial-gradient(circle at 39% 47%,#000 0 8%,transparent 13%),
+      radial-gradient(circle at 65% 50%,#000 0 7%,transparent 12%);
+  }
+  68%{
+    -webkit-mask-image:
+      radial-gradient(circle at 52% 40%,#000 0 42%,transparent 54%),
+      radial-gradient(circle at 32% 58%,#000 0 18%,transparent 26%),
+      radial-gradient(circle at 70% 62%,#000 0 17%,transparent 25%),
+      radial-gradient(circle at 45% 76%,#000 0 16%,transparent 24%);
+    mask-image:
+      radial-gradient(circle at 52% 40%,#000 0 42%,transparent 54%),
+      radial-gradient(circle at 32% 58%,#000 0 18%,transparent 26%),
+      radial-gradient(circle at 70% 62%,#000 0 17%,transparent 25%),
+      radial-gradient(circle at 45% 76%,#000 0 16%,transparent 24%);
+  }
+  100%{
+    -webkit-mask-image:radial-gradient(circle at 52% 48%,#000 0 75%,#000 86%,transparent 100%);
+    mask-image:radial-gradient(circle at 52% 48%,#000 0 75%,#000 86%,transparent 100%);
+  }
+}
+.paint-stage::after,
+.paint-stage.ink-enter::before,
+.ink-drop{
+  display:none!important;
+}
+.paint-stage:not(.ink-enter) .paint-image{
+  -webkit-mask-image:radial-gradient(circle at 52% 48%,#000 0 75%,#000 86%,transparent 100%);
+  mask-image:radial-gradient(circle at 52% 48%,#000 0 75%,#000 86%,transparent 100%);
+}
+@media(prefers-reduced-motion:reduce){
+  .paint-image{
+    -webkit-mask-image:none!important;
+    mask-image:none!important;
+  }
+}
