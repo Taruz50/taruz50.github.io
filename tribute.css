@@ -1035,3 +1035,183 @@ main{
     mask-size:130% 165%,82% 112%,72% 96%,58% 78%!important;
   }
 }
+
+
+/* Full-bleed hero correction: eliminate the split-screen image panel */
+.tribute-hero{
+  position:relative;
+  display:block!important;
+  min-height:100svh;
+  padding:0!important;
+  overflow:hidden;
+  background:#0f100f!important;
+}
+.tribute-copy{
+  position:relative;
+  z-index:5;
+  width:min(48vw,760px);
+  min-height:100svh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:8rem 0 6rem 7vw;
+  max-width:none!important;
+}
+.paint-stage{
+  position:absolute!important;
+  inset:0!important;
+  z-index:1!important;
+  width:100%!important;
+  height:100%!important;
+  margin:0!important;
+  max-width:none!important;
+  aspect-ratio:auto!important;
+}
+.paint-photo{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  overflow:hidden!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  opacity:1!important;
+  transform:none!important;
+  clip-path:none!important;
+  -webkit-mask-image:
+    radial-gradient(ellipse at 73% 48%,#000 0 34%,rgba(0,0,0,.98) 44%,rgba(0,0,0,.72) 57%,rgba(0,0,0,.3) 70%,transparent 84%),
+    radial-gradient(ellipse at 58% 60%,rgba(0,0,0,.82) 0 18%,rgba(0,0,0,.42) 33%,transparent 58%),
+    radial-gradient(ellipse at 88% 67%,rgba(0,0,0,.72) 0 16%,rgba(0,0,0,.32) 31%,transparent 56%);
+  mask-image:
+    radial-gradient(ellipse at 73% 48%,#000 0 34%,rgba(0,0,0,.98) 44%,rgba(0,0,0,.72) 57%,rgba(0,0,0,.3) 70%,transparent 84%),
+    radial-gradient(ellipse at 58% 60%,rgba(0,0,0,.82) 0 18%,rgba(0,0,0,.42) 33%,transparent 58%),
+    radial-gradient(ellipse at 88% 67%,rgba(0,0,0,.72) 0 16%,rgba(0,0,0,.32) 31%,transparent 56%);
+  -webkit-mask-repeat:no-repeat;
+  mask-repeat:no-repeat;
+  -webkit-mask-size:160% 185%,95% 115%,90% 105%;
+  mask-size:160% 185%,95% 115%,90% 105%;
+  -webkit-mask-position:73% 48%,58% 60%,88% 67%;
+  mask-position:73% 48%,58% 60%,88% 67%;
+}
+.paint-image{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  max-width:none!important;
+  object-fit:cover!important;
+  object-position:78% 43%!important;
+  transform:none!important;
+  filter:grayscale(1) contrast(1.12) brightness(.72)!important;
+  -webkit-mask-image:none!important;
+  mask-image:none!important;
+}
+.tribute-hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:3;
+  pointer-events:none;
+  background:
+    linear-gradient(90deg,
+      #0f100f 0%,
+      #0f100f 27%,
+      rgb(15 16 15 / 96%) 36%,
+      rgb(15 16 15 / 72%) 47%,
+      rgb(15 16 15 / 28%) 60%,
+      transparent 76%),
+    linear-gradient(180deg,
+      rgb(15 16 15 / 28%) 0%,
+      transparent 16%,
+      transparent 80%,
+      rgb(15 16 15 / 48%) 100%);
+}
+.paint-stage.ink-enter .paint-photo{
+  animation:heroInkField 1.85s cubic-bezier(.16,.74,.18,1) both!important;
+}
+@keyframes heroInkField{
+  0%{
+    -webkit-mask-size:0% 0%,0% 0%,0% 0%;
+    mask-size:0% 0%,0% 0%,0% 0%;
+  }
+  28%{
+    -webkit-mask-size:46% 58%,20% 26%,14% 20%;
+    mask-size:46% 58%,20% 26%,14% 20%;
+  }
+  58%{
+    -webkit-mask-size:98% 118%,54% 68%,46% 58%;
+    mask-size:98% 118%,54% 68%,46% 58%;
+  }
+  100%{
+    -webkit-mask-size:160% 185%,95% 115%,90% 105%;
+    mask-size:160% 185%,95% 115%,90% 105%;
+  }
+}
+.paint-stage:not(.ink-enter) .paint-photo{
+  -webkit-mask-size:160% 185%,95% 115%,90% 105%!important;
+  mask-size:160% 185%,95% 115%,90% 105%!important;
+}
+.ink-replay{
+  position:absolute!important;
+  z-index:6!important;
+  right:5vw!important;
+  bottom:2.2rem!important;
+  pointer-events:auto!important;
+}
+.paint-placeholder,
+.ink-drop,
+.paint-stage::before,
+.paint-stage::after,
+.paint-stage.ink-enter::before{
+  display:none!important;
+}
+
+@media(max-width:980px){
+  .tribute-copy{
+    width:min(92vw,760px);
+    min-height:auto;
+    padding:7rem 5vw 2.5rem;
+  }
+  .paint-stage{
+    position:relative!important;
+    inset:auto!important;
+    height:min(70svh,720px)!important;
+  }
+  .paint-photo{
+    -webkit-mask-image:
+      radial-gradient(ellipse at 50% 42%,#000 0 38%,rgba(0,0,0,.94) 50%,rgba(0,0,0,.55) 66%,transparent 84%),
+      radial-gradient(ellipse at 34% 66%,rgba(0,0,0,.7) 0 18%,rgba(0,0,0,.3) 33%,transparent 58%),
+      radial-gradient(ellipse at 72% 68%,rgba(0,0,0,.65) 0 17%,rgba(0,0,0,.28) 32%,transparent 57%);
+    mask-image:
+      radial-gradient(ellipse at 50% 42%,#000 0 38%,rgba(0,0,0,.94) 50%,rgba(0,0,0,.55) 66%,transparent 84%),
+      radial-gradient(ellipse at 34% 66%,rgba(0,0,0,.7) 0 18%,rgba(0,0,0,.3) 33%,transparent 58%),
+      radial-gradient(ellipse at 72% 68%,rgba(0,0,0,.65) 0 17%,rgba(0,0,0,.28) 32%,transparent 57%);
+    -webkit-mask-size:145% 165%,88% 102%,84% 98%;
+    mask-size:145% 165%,88% 102%,84% 98%;
+  }
+  .paint-image{
+    object-position:50% 38%!important;
+  }
+  .tribute-hero::after{
+    background:
+      linear-gradient(180deg,#0f100f 0%,rgb(15 16 15 / 45%) 18%,transparent 38%,transparent 82%,rgb(15 16 15 / 58%) 100%);
+  }
+  @keyframes heroInkField{
+    0%{-webkit-mask-size:0% 0%,0% 0%,0% 0%;mask-size:0% 0%,0% 0%,0% 0%}
+    50%{-webkit-mask-size:82% 98%,42% 52%,34% 44%;mask-size:82% 98%,42% 52%,34% 44%}
+    100%{-webkit-mask-size:145% 165%,88% 102%,84% 98%;mask-size:145% 165%,88% 102%,84% 98%}
+  }
+  .ink-replay{
+    right:5vw!important;
+    bottom:.75rem!important;
+  }
+}
+@media(max-width:520px){
+  .tribute-copy{
+    width:100%;
+    padding:5.8rem 1.2rem 2rem;
+  }
+  .paint-stage{
+    height:62svh!important;
+  }
+}
