@@ -1538,3 +1538,40 @@ footer a{
     font-size:.64rem!important;
   }
 }
+
+
+/* Secondary handwritten note refinement */
+.tribute-whisper[data-handwrite]{
+  font-family:var(--serif)!important;
+  font-style:italic!important;
+  font-weight:400!important;
+  font-size:clamp(1.4rem,2vw,2rem)!important;
+  line-height:1.25!important;
+  letter-spacing:.005em!important;
+  color:#a7aca1!important;
+  max-width:34rem;
+}
+.tribute-script--closing[data-handwrite]{
+  font-family:var(--serif)!important;
+  font-style:italic!important;
+  font-weight:400!important;
+  font-size:clamp(1.75rem,2.35vw,2.55rem)!important;
+  line-height:1.12!important;
+  letter-spacing:.004em!important;
+  color:#c9c3b8!important;
+}
+.tribute-whisper[data-handwrite] .handwrite-char,
+.tribute-script--closing[data-handwrite] .handwrite-char{
+  margin-right:0!important;
+}
+@media(max-width:520px){
+  .tribute-whisper[data-handwrite]{
+    font-size:clamp(1.2rem,5.8vw,1.65rem)!important;
+    line-height:1.3!important;
+    max-width:88vw;
+  }
+  .tribute-script--closing[data-handwrite]{
+    font-size:clamp(1.45rem,6.8vw,1.95rem)!important;
+    line-height:1.18!important;
+  }
+}
