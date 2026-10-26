@@ -1,8 +1,9 @@
 (() => {
   requestAnimationFrame(() => document.body.classList.add("is-ready"));
+
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   const reveals = document.querySelectorAll("[data-tribute-reveal]");
+
   if (reduced || !("IntersectionObserver" in window)) {
     reveals.forEach((el) => el.classList.add("is-visible"));
   } else {
@@ -12,27 +13,26 @@
         entry.target.classList.add("is-visible");
         observer.unobserve(entry.target);
       });
-    }, { threshold: 0.16, rootMargin: "0px 0px -8% 0px" });
+    }, { threshold: 0.14, rootMargin: "0px 0px -10% 0px" });
+
     reveals.forEach((el) => observer.observe(el));
   }
 
   const stage = document.querySelector("[data-paint-stage]");
   const trigger = document.querySelector("[data-paint-trigger]");
   const reset = document.querySelector("[data-paint-reset]");
-  if (stage && !reduced && finePointer) {
-    stage.addEventListener("pointermove", (event) => {
-      const r = stage.getBoundingClientRect();
-      const x = (event.clientX - r.left) / r.width - 0.5;
-      const y = (event.clientY - r.top) / r.height - 0.5;
-      stage.style.transform = `translate3d(${(x * 8).toFixed(1)}px,${(y * 7).toFixed(1)}px,0) rotate(${(x * 1).toFixed(2)}deg)`;
-    });
-    stage.addEventListener("pointerleave", () => {
-      stage.style.transform = "";
-    });
+  const image = document.querySelector(".paint-image");
+
+  const markImageMissing = () => stage?.classList.add("is-missing");
+  if (image) {
+    image.addEventListener("error", markImageMissing, { once:true });
+    if (image.complete && image.naturalWidth === 0) markImageMissing();
   }
 
   if (stage && trigger) {
     const revealPortrait = () => {
+      stage.classList.remove("is-revealed");
+      void stage.offsetWidth;
       stage.classList.add("is-revealed");
       trigger.textContent = "PORTRAIT REVEALED";
       trigger.disabled = true;
