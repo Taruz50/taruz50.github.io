@@ -359,3 +359,132 @@ footer{background:#090a09;color:#777d75}
   .ink-drop{display:none}
   .paint-photo{transition:none}
 }
+
+
+/* Cinematic beat choreography */
+.tribute-beat{
+  position:relative;
+  overflow:hidden;
+}
+.tribute-beat::after{
+  content:"";
+  position:absolute;
+  inset:auto 8vw 10% auto;
+  width:clamp(80px,10vw,140px);
+  height:1px;
+  background:rgb(231 226 216 / 16%);
+  transform:scaleX(0);
+  transform-origin:right;
+  transition:transform 1.2s .45s ease;
+}
+.tribute-beat.is-visible::after{transform:scaleX(1)}
+
+.tribute-whisper{
+  align-self:end;
+  color:#8f958c;
+  font:400 clamp(1.9rem,3vw,3.2rem)/1 var(--script);
+  opacity:0;
+  transform:translateY(10px);
+}
+.tribute-beat--quote.is-visible .tribute-whisper{
+  animation:whisperIn 1s .55s ease both;
+}
+@keyframes whisperIn{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:.9;transform:none}
+}
+
+.tribute-beat--method .method-stack span{
+  opacity:0;
+  transform:translateX(30px);
+}
+.tribute-beat--method.is-visible .method-stack span{
+  animation:methodBeat .55s cubic-bezier(.2,.7,.2,1) both;
+}
+.tribute-beat--method.is-visible .method-stack span:nth-child(1){animation-delay:.18s}
+.tribute-beat--method.is-visible .method-stack span:nth-child(2){animation-delay:.38s}
+.tribute-beat--method.is-visible .method-stack span:nth-child(3){animation-delay:.58s}
+.tribute-beat--method.is-visible .method-stack span:nth-child(4){animation-delay:.78s}
+@keyframes methodBeat{
+  from{opacity:0;transform:translateX(30px)}
+  to{opacity:1;transform:none}
+}
+
+.tribute-beat--approval .approval-mark{
+  opacity:0;
+}
+.tribute-beat--approval.is-visible .approval-mark{
+  animation:approvalDrop .72s .45s cubic-bezier(.17,.84,.24,1.16) both;
+}
+@keyframes approvalDrop{
+  0%{opacity:0;transform:rotate(-16deg) scale(.72)}
+  70%{opacity:1;transform:rotate(-5deg) scale(1.05)}
+  100%{opacity:1;transform:rotate(-8deg) scale(1)}
+}
+.tribute-beat--approval .moment-copy{
+  opacity:0;
+  transform:translateY(10px);
+}
+.tribute-beat--approval.is-visible .moment-copy{
+  animation:momentLine .8s .82s ease both;
+}
+@keyframes momentLine{
+  to{opacity:1;transform:none}
+}
+
+.tribute-beat--legacy .legacy-grid span{
+  opacity:0;
+  transform:translateY(18px);
+}
+.tribute-beat--legacy.is-visible .legacy-grid span{
+  animation:legacyWord .6s ease both;
+}
+.tribute-beat--legacy.is-visible .legacy-grid span:nth-child(1){animation-delay:.2s}
+.tribute-beat--legacy.is-visible .legacy-grid span:nth-child(2){animation-delay:.34s}
+.tribute-beat--legacy.is-visible .legacy-grid span:nth-child(3){animation-delay:.48s}
+.tribute-beat--legacy.is-visible .legacy-grid span:nth-child(4){animation-delay:.62s}
+@keyframes legacyWord{
+  to{opacity:1;transform:none}
+}
+
+.tribute-script--closing{
+  margin:1rem 0 -.4rem;
+  opacity:.86;
+}
+.tribute-close h2{
+  max-width:980px;
+  margin-inline:auto;
+}
+.tribute-close{
+  position:relative;
+}
+.tribute-close::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:18%;
+  width:1px;
+  height:clamp(44px,8vw,82px);
+  background:linear-gradient(#6f7666,transparent);
+  opacity:.38;
+}
+
+@media(max-width:850px){
+  .tribute-whisper{
+    align-self:start;
+    margin-top:.5rem;
+  }
+}
+@media(max-width:520px){
+  .tribute-beat::after{right:1.2rem}
+  .tribute-whisper{font-size:2rem}
+  .tribute-close::before{top:12%}
+}
+@media(prefers-reduced-motion:reduce){
+  .tribute-beat::after{transform:scaleX(1)}
+  .tribute-whisper,.tribute-beat--method .method-stack span,.tribute-beat--approval .approval-mark,.tribute-beat--approval .moment-copy,.tribute-beat--legacy .legacy-grid span{
+    opacity:1!important;
+    transform:none!important;
+    animation:none!important;
+  }
+}
