@@ -335,3 +335,67 @@ body.reader-open{overflow:hidden}
   .handwrite-char{opacity:1!important;filter:none!important;transform:none!important;transition:none!important}
   .book,.reader-page,.reader{transition:none}
 }
+
+
+/* Refined peel: anchored sheet with visible curled underside */
+.reader-stack{
+  position:relative;
+  min-height:min(78svh,760px);
+}
+.reader-page{
+  position:absolute;
+  inset:0;
+  width:100%;
+  min-height:min(78svh,760px);
+}
+.reader-page--under{
+  z-index:1;
+  transform:translateY(8px) scale(.992);
+  filter:brightness(.97);
+}
+.reader-page--top{
+  z-index:2;
+  overflow:hidden;
+  transform:none!important;
+}
+.page-curl{
+  position:absolute;
+  top:0;
+  right:0;
+  z-index:5;
+  width:0;
+  height:0;
+  opacity:0;
+  pointer-events:none;
+  transform-origin:top right;
+  background:
+    linear-gradient(225deg,
+      rgb(133 126 116 / 8%) 0 38%,
+      #f4ede1 39% 50%,
+      #c9c0b4 51% 63%,
+      rgb(88 83 77 / 18%) 64% 100%);
+  clip-path:polygon(100% 0,0 0,100% 100%);
+  box-shadow:-14px 18px 28px rgb(0 0 0 / 20%);
+  filter:drop-shadow(-8px 10px 12px rgb(0 0 0 / 14%));
+}
+.page-fold{
+  z-index:8;
+  background:
+    linear-gradient(225deg,
+      #bbb4a9 0 43%,
+      #f0e8dc 44% 58%,
+      #d2c9bc 59% 100%);
+}
+.page-fold::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(225deg,transparent 0 44%,rgb(0 0 0 / 8%) 45% 52%,transparent 53%);
+}
+.reader-page--top{
+  transition:none!important;
+}
+.handwrite-char{
+  transition:none!important;
+  will-change:opacity,filter,transform;
+}
