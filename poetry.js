@@ -18,21 +18,48 @@
     el.dataset.handwriteReady = "true";
   };
 
-  const setHandProgress = (el, progress) => {
+  const handState = new Map();
+
+  const renderHandProgress = (el, progress) => {
     const chars = [...el.querySelectorAll(".handwrite-char")];
     const total = Math.max(chars.length, 1);
     chars.forEach((char,index) => {
-      const start = index / total;
-      const end = Math.min(1, start + 0.22);
+      const start = Math.max(0, index / total - 0.08);
+      const end = Math.min(1, start + 0.34);
       const local = Math.max(0, Math.min(1, (progress - start) / Math.max(.001, end - start)));
       const eased = local * local * (3 - 2 * local);
       char.style.opacity = eased.toFixed(3);
-      char.style.filter = `blur(${(1.8 * (1-eased)).toFixed(2)}px)`;
-      char.style.transform = `translateY(${(3.5 * (1-eased)).toFixed(2)}px)`;
+      char.style.filter = `blur(${(1.25 * (1-eased)).toFixed(2)}px)`;
+      char.style.transform = `translateY(${(2.2 * (1-eased)).toFixed(2)}px)`;
     });
   };
 
-  handwritingTargets.forEach(prepareHandwriting);
+  const setHandTarget = (el, progress) => {
+    const state = handState.get(el) || { current: 0, target: 0 };
+    state.target = Math.max(0, Math.min(1, progress));
+    handState.set(el, state);
+  };
+
+  const animateHands = () => {
+    let active = false;
+    handState.forEach((state, el) => {
+      const delta = state.target - state.current;
+      if (Math.abs(delta) > 0.001) {
+        state.current += delta * 0.16;
+        active = true;
+      } else {
+        state.current = state.target;
+      }
+      renderHandProgress(el, state.current);
+    });
+    requestAnimationFrame(animateHands);
+  };
+
+  handwritingTargets.forEach((el) => {
+    prepareHandwriting(el);
+    handState.set(el, { current: 0, target: 0 });
+  });
+  requestAnimationFrame(animateHands);
 
   const progressForElement = (el, vh) => {
     const r = el.getBoundingClientRect();
@@ -68,7 +95,7 @@
     });
 
     handwritingTargets.forEach((el) => {
-      setHandProgress(el, progressForElement(el, vh));
+      setHandTarget(el, progressForElement(el, vh));
     });
   };
 
@@ -249,6 +276,10 @@
 
   if(reduced){
     document.querySelectorAll("[data-scroll-note]").forEach(el=>el.style.setProperty("--scroll-opacity","1"));
-    handwritingTargets.forEach(el=>setHandProgress(el,1));
+    handwritingTargets.forEach(el=>{
+      const state=handState.get(el)||{current:1,target:1};
+      state.current=1; state.target=1; handState.set(el,state);
+      renderHandProgress(el,1);
+    });
   }
 })();
