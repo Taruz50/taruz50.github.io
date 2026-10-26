@@ -756,3 +756,39 @@ main{
   .tribute-beat.is-visible h2{animation:none}
   .paint-stage.ink-enter::before{display:none}
 }
+
+
+/* Replay control for the portrait ink entrance */
+.ink-replay{
+  position:absolute;
+  right:2%;
+  bottom:1%;
+  z-index:5;
+  display:inline-flex;
+  align-items:center;
+  gap:.45rem;
+  padding:.5rem 0 .35rem;
+  border:0;
+  border-bottom:1px solid rgb(235 230 220 / 20%);
+  background:transparent;
+  color:#92988e;
+  font:500 .52rem/1 var(--mono);
+  letter-spacing:.12em;
+  cursor:pointer;
+  transition:color .2s ease,border-color .2s ease,opacity .2s ease;
+}
+.ink-replay i{font-size:.72rem}
+.ink-replay:hover,.ink-replay:focus-visible{
+  color:#b7c09d;
+  border-color:#69705f;
+}
+@media(max-width:520px){
+  .ink-replay{
+    right:3%;
+    bottom:-1.8rem;
+    min-height:44px;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  .ink-replay{display:none}
+}
