@@ -81,17 +81,28 @@
   <div class="reader" data-reader aria-hidden="true">
     <button class="reader-close" type="button" data-reader-close aria-label="Close reading mode"><i class="ri-close-line" aria-hidden="true"></i></button>
     <div class="reader-shell">
-      <article class="reader-page" data-reader-page>
-        <div class="reader-meta"><span data-reader-number>01</span><span>POETRY ARCHIVE</span></div>
-        <div class="reader-copy">
-          <p class="reader-kicker" data-reader-kicker>FIRST ENTRY</p>
-          <h2 data-reader-title>A page waiting for its poem.</h2>
-          <p class="reader-placeholder" data-reader-copy>The writing itself has not been added yet. This page is here to establish the reading experience without inventing words that are not yours.</p>
-        </div>
-        <div class="page-fold" data-page-fold aria-label="Drag to turn page" role="button" tabindex="0">
-          <span>TURN</span>
-        </div>
-      </article>
+      <div class="reader-stack">
+        <article class="reader-page reader-page--under" data-reader-under aria-hidden="true">
+          <div class="reader-meta"><span data-under-number>02</span><span>POETRY ARCHIVE</span></div>
+          <div class="reader-copy">
+            <p class="reader-kicker" data-under-kicker>FRAGMENT</p>
+            <h2 data-under-title>For the unfinished things.</h2>
+            <p class="reader-placeholder" data-under-copy>This volume is reserved for fragments, smaller thoughts and pieces that are intentionally incomplete.</p>
+          </div>
+        </article>
+        <article class="reader-page reader-page--top" data-reader-page>
+          <div class="reader-meta"><span data-reader-number>01</span><span>POETRY ARCHIVE</span></div>
+          <div class="reader-copy">
+            <p class="reader-kicker" data-reader-kicker>FIRST ENTRY</p>
+            <h2 data-reader-title>A page waiting for its poem.</h2>
+            <p class="reader-placeholder" data-reader-copy>The writing itself has not been added yet. This page is here to establish the reading experience without inventing words that are not yours.</p>
+          </div>
+          <div class="page-fold" data-page-fold aria-label="Drag to turn page" role="button" tabindex="0">
+            <span>TURN</span>
+          </div>
+          <div class="page-curl" data-page-curl aria-hidden="true"></div>
+        </article>
+      </div>
       <p class="reader-hint">Drag the folded corner ←</p>
     </div>
   </div>
