@@ -63,25 +63,36 @@
   handwritingTargets.forEach(prepareHandwriting);
 
   const playHandwriting = (el) => {
-    if (reduced || el.dataset.handwritePlayed === "true") return;
-    el.dataset.handwritePlayed = "true";
+    if (reduced || el.dataset.handwriteLooping === "true") return;
+    el.dataset.handwriteLooping = "true";
 
     const chars = [...el.querySelectorAll(".handwrite-char")];
-    let delay = 0;
+    const writeCycle = () => {
+      let delay = 0;
 
-    chars.forEach((char, index) => {
-      const glyph = char.textContent;
-      const isSpace = glyph === "\u00a0";
-      const punctuationPause = /[,.!?]/.test(glyph || "") ? 120 : 0;
-      const naturalVariation = (index % 4) * 8 + (index % 3) * 5;
-      delay += isSpace ? 34 : 46 + naturalVariation;
+      chars.forEach((char, index) => {
+        const glyph = char.textContent;
+        const isSpace = glyph === "\u00a0";
+        const punctuationPause = /[,.!?]/.test(glyph || "") ? 150 : 0;
+        const naturalVariation = (index % 4) * 9 + (index % 3) * 6;
+        delay += isSpace ? 38 : 52 + naturalVariation;
 
-      window.setTimeout(() => {
-        char.classList.add("is-written");
-      }, delay);
+        window.setTimeout(() => char.classList.add("is-written"), delay);
+        delay += punctuationPause;
+      });
 
-      delay += punctuationPause;
-    });
+      const hold = 1800;
+      const retractStart = delay + hold;
+
+      [...chars].reverse().forEach((char, index) => {
+        window.setTimeout(() => char.classList.remove("is-written"), retractStart + index * 38);
+      });
+
+      const cycleDuration = retractStart + chars.length * 38 + 900;
+      window.setTimeout(writeCycle, cycleDuration);
+    };
+
+    writeCycle();
   };
 
   if (reduced) {
