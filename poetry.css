@@ -54,3 +54,41 @@ body.is-ready .enter{animation:poetryEnterIn .7s .45s ease both}
   .poem-card::after{display:none}
   .reading-room:hover .reading-sample{transform:rotate(1deg);box-shadow:12px 14px 0 rgb(0 0 0 / 18%)}
 }
+
+
+/* Shared living-handwriting treatment */
+[data-handwrite]{
+  display:inline-block;
+  min-height:1em;
+}
+.handwrite-char{
+  display:inline-block;
+  opacity:0;
+  filter:blur(2.4px);
+  transform:translateY(5px) rotate(-.35deg);
+  text-shadow:0 0 6px rgb(231 225 214 / 9%);
+  transition:
+    opacity .52s ease,
+    filter .72s ease,
+    transform .72s cubic-bezier(.2,.7,.2,1);
+  will-change:opacity,filter,transform;
+}
+.handwrite-char.is-written{
+  opacity:1;
+  filter:blur(0);
+  transform:translateY(0) rotate(0deg);
+}
+[data-handwrite] .handwrite-char:nth-child(4n){
+  transform:translateY(6px) rotate(.28deg);
+}
+[data-handwrite] .handwrite-char:nth-child(4n).is-written{
+  transform:translateY(0) rotate(0deg);
+}
+@media(prefers-reduced-motion:reduce){
+  .handwrite-char{
+    opacity:1!important;
+    filter:none!important;
+    transform:none!important;
+    transition:none!important;
+  }
+}
