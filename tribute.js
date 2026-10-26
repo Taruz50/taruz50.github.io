@@ -28,14 +28,31 @@
   const renderHandProgress=(el,progress)=>{
     const chars=[...el.querySelectorAll(".handwrite-char")];
     const total=Math.max(chars.length,1);
+    const rawText=el.getAttribute("aria-label")||"";
+    const wordRanges=[];
+    let start=0;
+    rawText.split(/(\s+)/).forEach(part=>{
+      const len=[...part].length;
+      if(part.trim()) wordRanges.push([start,start+len]);
+      start+=len;
+    });
+
     chars.forEach((char,index)=>{
-      const start=Math.max(0,index/total-.08);
-      const end=Math.min(1,start+.34);
-      const local=Math.max(0,Math.min(1,(progress-start)/Math.max(.001,end-start)));
+      let groupStart=index/total;
+      let groupEnd=Math.min(1,groupStart+.34);
+
+      const range=wordRanges.find(([a,b])=>index>=a&&index<b);
+      if(range){
+        const [a,b]=range;
+        groupStart=Math.max(0,(a/total)-.035);
+        groupEnd=Math.min(1,(b/total)+.12);
+      }
+
+      const local=Math.max(0,Math.min(1,(progress-groupStart)/Math.max(.001,groupEnd-groupStart)));
       const eased=local*local*(3-2*local);
       char.style.opacity=eased.toFixed(3);
-      char.style.filter=`blur(${(1.25*(1-eased)).toFixed(2)}px)`;
-      char.style.transform=`translateY(${(2.2*(1-eased)).toFixed(2)}px)`;
+      char.style.filter=`blur(${(1.05*(1-eased)).toFixed(2)}px)`;
+      char.style.transform=`translateY(${(1.8*(1-eased)).toFixed(2)}px)`;
     });
   };
 
