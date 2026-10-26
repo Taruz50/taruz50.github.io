@@ -1230,3 +1230,105 @@ main{
   -webkit-mask-size:auto!important;
   mask-size:auto!important;
 }
+
+
+/* Final hero behavior fixes: JS animates the image, and mobile stays full-bleed */
+.paint-image{
+  clip-path:polygon(-8% -8%,108% -6%,110% 108%,-10% 110%);
+  -webkit-clip-path:polygon(-8% -8%,108% -6%,110% 108%,-10% 110%);
+  will-change:clip-path,opacity,transform;
+}
+
+@media(max-width:980px){
+  .tribute-hero{
+    position:relative!important;
+    display:block!important;
+    min-height:100svh!important;
+    padding:0!important;
+    overflow:hidden!important;
+  }
+  .tribute-copy{
+    position:relative!important;
+    z-index:5!important;
+    width:min(88vw,680px)!important;
+    min-height:100svh!important;
+    padding:6.5rem 1.4rem 5rem!important;
+    justify-content:center!important;
+  }
+  .paint-stage{
+    position:absolute!important;
+    inset:0!important;
+    width:100%!important;
+    height:100%!important;
+    margin:0!important;
+  }
+  .paint-photo{
+    position:absolute!important;
+    inset:0!important;
+    width:100%!important;
+    height:100%!important;
+  }
+  .paint-image{
+    position:absolute!important;
+    inset:0!important;
+    width:100%!important;
+    height:100%!important;
+    transform:none!important;
+    object-fit:cover!important;
+    object-position:62% 40%!important;
+  }
+  .tribute-hero::after{
+    background:
+      linear-gradient(90deg,
+        #0f100f 0%,
+        rgb(15 16 15 / 94%) 22%,
+        rgb(15 16 15 / 74%) 42%,
+        rgb(15 16 15 / 30%) 63%,
+        transparent 82%),
+      linear-gradient(180deg,
+        rgb(15 16 15 / 35%) 0%,
+        transparent 20%,
+        transparent 78%,
+        rgb(15 16 15 / 54%) 100%)!important;
+  }
+  .ink-replay{
+    right:1.25rem!important;
+    bottom:1.1rem!important;
+  }
+}
+
+@media(max-width:520px){
+  .tribute-copy{
+    width:92vw!important;
+    min-height:100svh!important;
+    padding:5.2rem 1.1rem 4.5rem!important;
+  }
+  .tribute-copy h1{
+    font-size:clamp(3.4rem,15.5vw,4.7rem)!important;
+  }
+  .paint-image{
+    object-position:64% 42%!important;
+  }
+  .tribute-hero::after{
+    background:
+      linear-gradient(90deg,
+        #0f100f 0%,
+        rgb(15 16 15 / 96%) 20%,
+        rgb(15 16 15 / 78%) 44%,
+        rgb(15 16 15 / 28%) 70%,
+        transparent 100%),
+      linear-gradient(180deg,
+        rgb(15 16 15 / 42%) 0%,
+        transparent 22%,
+        transparent 74%,
+        rgb(15 16 15 / 62%) 100%)!important;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .paint-image{
+    clip-path:none!important;
+    -webkit-clip-path:none!important;
+    transform:none!important;
+  }
+}
