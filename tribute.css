@@ -1332,3 +1332,86 @@ main{
     transform:none!important;
   }
 }
+
+
+/* Slow brushed-ink reveal */
+.paint-image{
+  clip-path:none!important;
+  -webkit-clip-path:none!important;
+  opacity:1!important;
+  transform:none!important;
+}
+.ink-brush-curtain{
+  position:absolute;
+  inset:0;
+  z-index:4;
+  overflow:hidden;
+  pointer-events:none;
+}
+.ink-brush-curtain span{
+  position:absolute;
+  left:-8%;
+  width:118%;
+  height:20%;
+  background:
+    linear-gradient(90deg,#0f100f 0%,#0f100f 72%,rgb(15 16 15 / 92%) 88%,transparent 100%);
+  filter:blur(2px);
+  transform-origin:left center;
+  transform:scaleX(1.02) skewX(-5deg);
+  opacity:1;
+}
+.ink-brush-curtain span:nth-child(1){top:-2%;height:19%;transform:scaleX(1.03) skewX(-7deg) rotate(-1deg)}
+.ink-brush-curtain span:nth-child(2){top:13%;height:18%;transform:scaleX(1.02) skewX(4deg) rotate(.6deg)}
+.ink-brush-curtain span:nth-child(3){top:27%;height:19%;transform:scaleX(1.04) skewX(-6deg) rotate(-.8deg)}
+.ink-brush-curtain span:nth-child(4){top:42%;height:18%;transform:scaleX(1.02) skewX(5deg) rotate(.5deg)}
+.ink-brush-curtain span:nth-child(5){top:56%;height:20%;transform:scaleX(1.05) skewX(-5deg) rotate(-.7deg)}
+.ink-brush-curtain span:nth-child(6){top:72%;height:18%;transform:scaleX(1.03) skewX(4deg) rotate(.6deg)}
+.ink-brush-curtain span:nth-child(7){top:86%;height:18%;transform:scaleX(1.05) skewX(-4deg) rotate(-.5deg)}
+
+.paint-stage.is-brushing .ink-brush-curtain span{
+  animation:brushAway 3.4s cubic-bezier(.24,.72,.18,1) forwards;
+}
+.paint-stage.is-brushing .ink-brush-curtain span:nth-child(1){animation-delay:.05s}
+.paint-stage.is-brushing .ink-brush-curtain span:nth-child(2){animation-delay:.18s}
+.paint-stage.is-brushing .ink-brush-curtain span:nth-child(3){animation-delay:.34s}
+.paint-stage.is-brushing .ink-brush-curtain span:nth-child(4){animation-delay:.5s}
+.paint-stage.is-brushing .ink-brush-curtain span:nth-child(5){animation-delay:.66s}
+.paint-stage.is-brushing .ink-brush-curtain span:nth-child(6){animation-delay:.82s}
+.paint-stage.is-brushing .ink-brush-curtain span:nth-child(7){animation-delay:.98s}
+
+@keyframes brushAway{
+  0%{opacity:1;transform:scaleX(1.04) translateX(0) skewX(-4deg)}
+  32%{opacity:1;transform:scaleX(.82) translateX(4%) skewX(-3deg)}
+  68%{opacity:.72;transform:scaleX(.38) translateX(18%) skewX(-2deg)}
+  100%{opacity:0;transform:scaleX(0) translateX(38%) skewX(0deg)}
+}
+
+.ink-brush-curtain::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 66% 36%,transparent 0 9%,rgb(15 16 15 / 84%) 18%,transparent 31%),
+    radial-gradient(circle at 79% 57%,transparent 0 8%,rgb(15 16 15 / 78%) 17%,transparent 29%);
+  opacity:.28;
+  mix-blend-mode:multiply;
+}
+.paint-stage.is-brushing .ink-brush-curtain::after{
+  animation:inkMistFade 3.9s .55s ease forwards;
+}
+@keyframes inkMistFade{to{opacity:0}}
+
+@media(max-width:980px){
+  .ink-brush-curtain span{
+    left:-12%;
+    width:126%;
+    height:18%;
+    filter:blur(1.5px);
+  }
+  .paint-stage.is-brushing .ink-brush-curtain span{
+    animation-duration:3.8s;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  .ink-brush-curtain{display:none!important}
+}
