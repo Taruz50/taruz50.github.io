@@ -1,21 +1,6 @@
 (() => {
   requestAnimationFrame(() => document.body.classList.add("is-ready"));
-
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const reveals = document.querySelectorAll("[data-tribute-reveal]");
-
-  if (reduced || !("IntersectionObserver" in window)) {
-    reveals.forEach((el) => el.classList.add("is-visible"));
-  } else {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add("is-visible");
-        observer.unobserve(entry.target);
-      });
-    }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
-    reveals.forEach((el) => observer.observe(el));
-  }
 
   const stage = document.querySelector("[data-paint-stage]");
   const replay = document.querySelector("[data-ink-replay]");
@@ -38,78 +23,70 @@
   if (stage && brush && !reduced) {
     requestAnimationFrame(() => requestAnimationFrame(playInk));
   }
-
   replay?.addEventListener("click", playInk);
 
   const handwritingTargets = [...document.querySelectorAll("[data-handwrite]")];
-
-  const prepareHandwriting = (el) => {
+  handwritingTargets.forEach((el) => {
     if (el.dataset.handwriteReady) return;
     const text = el.textContent ?? "";
     el.textContent = "";
     el.setAttribute("aria-label", text);
-
-    [...text].forEach((char, index) => {
+    [...text].forEach((char) => {
       const span = document.createElement("span");
       span.className = "handwrite-char";
       span.textContent = char === " " ? "\u00a0" : char;
-      span.style.setProperty("--hand-index", index);
       el.appendChild(span);
     });
-
     el.dataset.handwriteReady = "true";
+  });
+
+  const revealBlocks = [...document.querySelectorAll("[data-tribute-reveal]")];
+
+  const updateScrollState = () => {
+    if (reduced) return;
+    const vh = window.innerHeight || 1;
+
+    revealBlocks.forEach((block) => {
+      const rect = block.getBoundingClientRect();
+      const enter = 1 - Math.min(1, Math.max(0, (rect.top - vh * .12) / (vh * .76)));
+      const leave = Math.min(1, Math.max(0, (rect.bottom - vh * .06) / (vh * .58)));
+      const strength = Math.max(.08, Math.min(1, Math.min(enter, leave) * 1.18));
+      block.style.setProperty("--tribute-scroll-opacity", strength.toFixed(3));
+      block.classList.toggle("is-visible", strength > .12);
+    });
+
+    handwritingTargets.forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      const enter = 1 - Math.min(1, Math.max(0, (rect.top - vh * .22) / (vh * .55)));
+      const leave = Math.min(1, Math.max(0, (rect.bottom - vh * .08) / (vh * .48)));
+      const progress = Math.max(0, Math.min(1, Math.min(enter * 1.12, leave * 1.2)));
+      const chars = [...el.querySelectorAll(".handwrite-char")];
+      const written = Math.floor(progress * chars.length);
+      chars.forEach((char,index) => char.classList.toggle("is-written", index < written));
+    });
   };
 
-  handwritingTargets.forEach(prepareHandwriting);
-
-  const playHandwriting = (el) => {
-    if (reduced || el.dataset.handwriteLooping === "true") return;
-    el.dataset.handwriteLooping = "true";
-
-    const chars = [...el.querySelectorAll(".handwrite-char")];
-    const writeCycle = () => {
-      let delay = 0;
-
-      chars.forEach((char, index) => {
-        const glyph = char.textContent;
-        const isSpace = glyph === "\u00a0";
-        const punctuationPause = /[,.!?]/.test(glyph || "") ? 150 : 0;
-        const naturalVariation = (index % 4) * 9 + (index % 3) * 6;
-        delay += isSpace ? 38 : 52 + naturalVariation;
-
-        window.setTimeout(() => char.classList.add("is-written"), delay);
-        delay += punctuationPause;
-      });
-
-      const hold = 1800;
-      const retractStart = delay + hold;
-
-      [...chars].reverse().forEach((char, index) => {
-        window.setTimeout(() => char.classList.remove("is-written"), retractStart + index * 38);
-      });
-
-      const cycleDuration = retractStart + chars.length * 38 + 900;
-      window.setTimeout(writeCycle, cycleDuration);
-    };
-
-    writeCycle();
+  let ticking = false;
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      updateScrollState();
+      ticking = false;
+    });
   };
+
+  updateScrollState();
+  addEventListener("scroll", onScroll, { passive:true });
+  addEventListener("resize", onScroll);
 
   if (reduced) {
+    revealBlocks.forEach((block) => {
+      block.classList.add("is-visible");
+      block.style.setProperty("--tribute-scroll-opacity","1");
+    });
     handwritingTargets.forEach((el) => {
       el.querySelectorAll(".handwrite-char").forEach((char) => char.classList.add("is-written"));
     });
-  } else if ("IntersectionObserver" in window) {
-    const handwritingObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        playHandwriting(entry.target);
-        handwritingObserver.unobserve(entry.target);
-      });
-    }, { threshold: 0.35, rootMargin: "0px 0px -12% 0px" });
-
-    handwritingTargets.forEach((el) => handwritingObserver.observe(el));
-  } else {
-    handwritingTargets.forEach(playHandwriting);
   }
 })();
