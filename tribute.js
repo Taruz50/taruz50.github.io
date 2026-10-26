@@ -23,23 +23,6 @@
   if (stage && brush && !reduced) requestAnimationFrame(() => requestAnimationFrame(playInk));
   replay?.addEventListener("click", playInk);
 
-  const handwritingTargets=[...document.querySelectorAll("[data-handwrite]")];
-  handwritingTargets.forEach(el=>{
-    if(el.dataset.handwriteReady) return;
-    const text=el.textContent??"";
-    el.textContent="";
-    el.setAttribute("aria-label",text);
-    [...text].forEach(char=>{
-      const span=document.createElement("span");
-      span.className="handwrite-char";
-      span.textContent=char===" "?"\u00a0":char;
-      el.appendChild(span);
-    });
-    el.dataset.handwriteReady="true";
-    handState.set(el,{current:0,target:0});
-  });
-  requestAnimationFrame(animateHands);
-
   const handState=new Map();
 
   const renderHandProgress=(el,progress)=>{
@@ -70,6 +53,23 @@
     });
     requestAnimationFrame(animateHands);
   };
+
+  const handwritingTargets=[...document.querySelectorAll("[data-handwrite]")];
+  handwritingTargets.forEach(el=>{
+    if(el.dataset.handwriteReady) return;
+    const text=el.textContent??"";
+    el.textContent="";
+    el.setAttribute("aria-label",text);
+    [...text].forEach(char=>{
+      const span=document.createElement("span");
+      span.className="handwrite-char";
+      span.textContent=char===" "?"\u00a0":char;
+      el.appendChild(span);
+    });
+    el.dataset.handwriteReady="true";
+    handState.set(el,{current:0,target:0});
+  });
+  requestAnimationFrame(animateHands);
 
   const blocks=[...document.querySelectorAll("[data-tribute-reveal]")];
   const update=()=>{
